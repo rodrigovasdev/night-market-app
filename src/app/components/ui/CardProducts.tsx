@@ -1,10 +1,17 @@
 import React from 'react'
 import Button from './Button'
+import Image from "next/image";
 
 function CardProducts() {
   return (
         <div className="flex flex-col space-y-2">
-            <img className="rounded-xl" src="/assets/ecommerce.jpg" alt="" />
+                  <Image
+                    className="rounded-xl"
+                    src="/assets/ecommerce.jpg"
+                    alt="Producto"
+                    width = {500}
+                    height = {300}
+                  />
             <span className="font-semibold">Modern Chair</span>
             <span className="text-gray-500">Ergonomic and durable.</span>
             <span className="text-gray-500">$199</span>
