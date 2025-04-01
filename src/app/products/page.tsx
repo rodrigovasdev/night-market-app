@@ -1,12 +1,19 @@
 import Button from "@/app/components/ui/Button";
+import CardProducts from "../components/ui/CardProducts";
+import { JSX } from "react";
 
 export default function Products() {
+
+    const productElements: JSX.Element[] = [];
+
+    for (let i = 0; i < 12; i++) {
+        productElements.push(<CardProducts key={i} />);
+      }
+    
     return (
-        <div className="h-screen bg-gray-100 px-5 md:px-0 text-center content-center grid gap-6">
-            <h1>Products</h1>
-            <Button variant="primary" content="Hola"/>
-            <Button variant="secondary" content="Mundo"/>
+        <div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 gap-10 p-10 md:px-25 wjustify-items-center">
+            {productElements}
         </div>
-        
+
     );
 }
