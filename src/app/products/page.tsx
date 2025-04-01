@@ -1,4 +1,3 @@
-import Button from "@/app/components/ui/Button";
 import CardProducts from "../components/ui/CardProducts";
 import { JSX } from "react";
 
