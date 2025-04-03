@@ -10,6 +10,7 @@
     "postinstall": "flowbite-react patch"
   },
   "dependencies": {
+    "@heroicons/react": "^2.2.0",
     "flowbite-react": "^0.11.5",
     "lucide-react": "^0.487.0",
     "next": "15.2.4",

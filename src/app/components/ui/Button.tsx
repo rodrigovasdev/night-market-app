@@ -1,18 +1,35 @@
 interface ButtonProps {
-    variant: string;
-    content: string;
+    variant?: string;
+    type?: string;
+    content?: string;
     width?: string;
+    heigth?: string;
+    paddingY?: string;
+    paddingX?: string;
+    children?: React.ReactNode;
 }
-  
-  const Button = ({ variant, content = "default", width = "w-40" }: ButtonProps) => {
+
+  const Button = ({ variant, content = "default", type = "text", children, width = "w-40", heigth = "h-20" , paddingY = "py-3" , paddingX = "px-4"}: ButtonProps) => {
+    const sharedClasses = "relative cursor-pointer rounded-full font-semibold text-sm";
     const arrayClass = variant === "primary"
-      ? `relative text-white bg-neutral-950 font-semibold rounded-lg px-4 py-3 ${width} cursor-pointer hover:bg-neutral-700`
-      : `relative text-neutral-950 font-semibold bg-slate-100 border-2 border-neutral-950 rounded-lg px-4 py-3 ${width} cursor-pointer hover:bg-slate-200`;
-    return (
+      ? `text-white bg-neutral-950 hover:bg-neutral-600 ${sharedClasses} ${paddingY} ${paddingX} ${width} ${heigth}`
+      : `text-neutral-950 bg-white border-1 border-neutral-200 hover:bg-neutral-100 hover:border-transparent ${sharedClasses} ${paddingY} ${paddingX} ${width} ${heigth}`;
+
+    if (type === "icon") {
+      return (
+        <button className={sharedClasses}>
+          {children}
+        </button>
+      );
+    }
+    else {
+      return (
       <button className={arrayClass}>
         {content}
       </button>
     );
+    }
+    
   };
   
   export default Button;
