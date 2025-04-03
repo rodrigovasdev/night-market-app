@@ -44,10 +44,10 @@ export default function Navbar () {
                         <Link href="/" className="block py-2 px-3 text-gray-600 hover:text-gray-950 md:p-0">Home</Link>
                     </li>
                     <li className="hover:border-b-2 px-1.5  ">
-                        <Link href="/" className="block py-2 px-3 text-gray-600 hover:text-gray-950 md:p-0">Products</Link>
+                        <Link href="/products" className="block py-2 px-3 text-gray-600 hover:text-gray-950 md:p-0">Products</Link>
                     </li>
                     <li className="hover:border-b-2 px-1.5   ">
-                        <Link href="/" className="block py-2 px-3 text-gray-600 hover:text-gray-950 md:p-0">SectionB</Link>
+                        <Link href="/products/details" className="block py-2 px-3 text-gray-600 hover:text-gray-950 md:p-0">SectionB</Link>
                     </li>
                     <li className="hover:border-b-2 px-1.5 ">
                         <Link href="/" className="block py-2 px-3 text-gray-600 hover:text-gray-950 md:p-0">SectionC</Link>
