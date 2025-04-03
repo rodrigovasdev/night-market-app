@@ -27,7 +27,7 @@ const Details = () => {
           <span className = "text-md pt-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin nec varius libero. Nulla facilisi. Cras pellentesque felis ut consectetur blandit. Nam eget augue euismod, gravida nisi ac, interdum neque. Fusce nec 
             tincidunt est. Integer pretium vestibulum risus, sit amet rutrum nisi suscipit quis. Aenean sed justo sed justo facilisis pulvinar.</span>
           <span className = "text-2xl font-bold pt-5 pb-5">$25.00</span>
-          <Button variant='primary' content='Add to Cart'></Button>
+          <Button variant='primary' width='w-1/2 md:w-1/4' content='Add to Cart'></Button>
           <InfoDetail></InfoDetail>
           <StarsGive></StarsGive>
           <h2 className = "py-5 font-bold text-2xl">Related Products</h2>
