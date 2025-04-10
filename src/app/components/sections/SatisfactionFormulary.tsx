@@ -1,6 +1,7 @@
 'use client';
 
-import { useState } from 'react';
+import { useState } from 'react'
+import { ChangeEvent, FormEvent } from 'react';
 import { Star } from 'lucide-react';
 import Button from '@/app/components/ui/Button'
 
@@ -13,11 +14,11 @@ export default function SatisfactionForm() {
     comments: ''
   });
 
-  const handleChange = (e:any) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e:any) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log({ ...formData, rating });
     alert('Formulario enviado con éxito');
