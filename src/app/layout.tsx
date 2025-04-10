@@ -3,7 +3,7 @@ import { Geist_Mono } from "next/font/google";
 import { Open_Sans } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/app/components/layout/Navbar";
-
+import Footer from "@/app/components/layout/Footer";
 
 const openSans = Open_Sans({
   variable: "--font-open-sans",
@@ -30,8 +30,9 @@ export default function RootLayout({
       <body
         className={`${openSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Navbar />
+        <Navbar/>
         {children}
+        <Footer/>
       </body>
     </html>
   );
