@@ -4,7 +4,7 @@ import Image from "next/image";
 
 function CardProducts() {
   return (
-        <div className="flex flex-col space-y-2 border-1 border-gray-200 rounded-lg">
+        <div className="flex flex-col space-y-2 border-1 bg-white border-gray-200 rounded-lg hover:cursor-pointer hover:shadow-lg hover:border-1 hover:border-gray-900 transition duration-200 ease-in-out">
                   <Image
                     className="rounded-lg"
                     src="/assets/ecommerce.jpg"
