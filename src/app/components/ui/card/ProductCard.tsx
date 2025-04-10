@@ -1,10 +1,12 @@
 import React from 'react'
-import Button from './Button'
+import Button from '../Button'
 import Image from "next/image";
+import Link from 'next/link';
 
-function CardProducts() {
+function ProductCard() {
   return (
-        <div className="flex flex-col space-y-2 border-1 bg-white border-gray-200 rounded-lg hover:cursor-pointer hover:shadow-lg hover:border-1 hover:border-gray-900 transition duration-200 ease-in-out">
+    <Link href={'/products/details'}>
+      <div className="flex flex-col space-y-2 border-1 bg-white border-gray-200 rounded-lg hover:cursor-pointer hover:shadow-lg hover:border-1 hover:border-gray-900 transition duration-200 ease-in-out">
                   <Image
                     className="rounded-lg"
                     src="/assets/ecommerce.jpg"
@@ -18,11 +20,12 @@ function CardProducts() {
                     <span className="text-slate-900 font-bold">$199</span>
                   </div>
             <div className="flex flex-col lg:flex-row w-full gap-2 pb-3 px-3">
-              <Button variant="primary" content="Add To Cart" width="w-full lg:w-1/2"/>
-              <Button variant="secondary" content="View Details" width="w-full lg:w-1/2" />
+              <Button variant="primary" content="Add To Cart" width="w-full"/>
             </div>
         </div>
+    </Link>
+        
   )
 }
 
-export default CardProducts
+export default ProductCard;

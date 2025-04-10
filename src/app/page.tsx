@@ -1,13 +1,14 @@
 
-import Start from "@/app/components/sections/Start";
-import FeaturedProducts from "@/app/components/sections/FeaturedProducts";
-import Jumbotron from "@/app/components/sections/Jumbotron";
-
+import Start from "@/app/components/sections/landing/Start";
+import FeaturedProducts from "@/app/components/sections/landing/FeaturedProducts";
+import Jumbotron from "@/app/components/sections/landing/Jumbotron";
+import OfferCardsSection from "@/app/components/sections/landing/OfferCardsSection";
 export default function Home() {
   return (
     <>
       <Start/>
       <FeaturedProducts/>
+      <OfferCardsSection/>
       <Jumbotron/>
     </>
   );

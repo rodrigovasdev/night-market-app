@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useState } from 'react';
-import ProductImage from '@/app/components/sections/ProductImage';
-import ProductInfo from '@/app/components/sections/ProductInfo';
-import RelatedProducts from '@/app/components/sections/RelatedProducts';
+import ProductImage from '@/app/components/sections/product/ProductImage';
+import ProductInfo from '@/app/components/sections/product/ProductInfo';
+import RelatedProducts from '@/app/components/sections/product/RelatedProducts';
 
 const Details = () => {
   const imagesUrl = ["/assets/image1.jpg","/assets/image2.jpg","/assets/image3.jpg"];

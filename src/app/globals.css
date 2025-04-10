@@ -12,6 +12,11 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-open-sans);
   --font-mono: var(--font-geist-mono);
+  --color-night: #0a0f0d;
+  --color-lima: #00C851;
+  --color-electric: #007BFF;
+  --color-golden: #FFC300;
+  --color-coral: #FF4C4C;
 }
 
 @media (prefers-color-scheme: ligth) {

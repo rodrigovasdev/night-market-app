@@ -1,5 +1,5 @@
 import React from 'react'
-import CardProducts from "@/app/components/ui/CardProducts";
+import CardProducts from "@/app/components/ui/card/ProductCard";
 import { JSX } from "react";
 
 function ElementosProducts() {

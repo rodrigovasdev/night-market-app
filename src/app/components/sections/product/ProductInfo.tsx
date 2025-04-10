@@ -1,6 +1,6 @@
 import Button from '@/app/components/ui/Button';
 import InfoDetail from '@/app/components/ui/InfoDetail';
-import SatisfactionForm from '@/app/components/sections/SatisfactionFormulary';
+import SatisfactionForm from '@/app/components/sections/product/SatisfactionFormulary';
 
 const ProductInfo = () => (
   <div className="flex flex-col items-start w-full pt-5 md:pt-0">
