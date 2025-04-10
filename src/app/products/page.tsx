@@ -1,18 +1,7 @@
-import CardProducts from "../components/ui/CardProducts";
-import { JSX } from "react";
+import ElementosProducts from "../components/sections/ElementsProducts";
 
 export default function Products() {
-
-    const productElements: JSX.Element[] = [];
-
-    for (let i = 0; i < 12; i++) {
-        productElements.push(<CardProducts key={i} />);
-      }
-    
     return (
-        <div className="grid grid-cols-1 bg-gray-50 md:grid-cols-3 xl:grid-cols-4 gap-10 p-10 md:px-25 justify-items-center">
-            {productElements}
-        </div>
-
+        <ElementosProducts></ElementosProducts>
     );
 }
