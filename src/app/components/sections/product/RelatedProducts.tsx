@@ -1,4 +1,4 @@
-import CardProducts from '@/app/components/ui/CardProducts';
+import CardProducts from '@/app/components/ui/card/ProductCard';
 
 const RelatedProducts = () => (
   <div>

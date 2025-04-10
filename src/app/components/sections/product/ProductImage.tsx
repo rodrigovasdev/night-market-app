@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Carrousel from '@/app/components/ui/Carrousel';
-import SatisfactionForm from '@/app/components/sections/SatisfactionFormulary';
+import SatisfactionForm from '@/app/components/sections/product/SatisfactionFormulary';
 
 interface ProductImageProps {
   imageSelected: string;
