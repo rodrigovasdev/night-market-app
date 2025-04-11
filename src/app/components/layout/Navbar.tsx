@@ -1,13 +1,29 @@
+"use client"
+
 import Button from "@/app/components/ui/Button"
 import { UserIcon, ShoppingCartIcon } from "@heroicons/react/24/solid"
 import Link from "next/link"
+import { useState } from "react"
+import PopUpLogin from "../sections/userLoginRegister/PopUpLogin"
+
+
 
 export default function Navbar () {
+
+    const [menuOpen, setMenuOpen] = useState(false)
+
+    const toggleMenu = () =>{
+        setMenuOpen(!menuOpen)
+        console.log("Hola!")
+    }
+
     return (
 
-            <nav className="bg-white w-full z-20 top-0 start-0 sticky border-b border-gray-200">
+            <nav className="relative bg-white w-full z-20 top-0 start-0 sticky border-b border-gray-200">
+               {menuOpen && 
+                    <PopUpLogin onClick={toggleMenu}></PopUpLogin>
+                }
                 <div className="flex justify-between p-4">
-
                     <div className="w-1/4 ">
                         <a href="#" className="flex items-center space-x-3 rtl:space-x-reverse">
                             {/* <img src="https://flowbite.com/docs/images/logo.svg" className="h-8" alt="Flowbite Logo"/> */}
@@ -17,9 +33,9 @@ export default function Navbar () {
                     
                     <div className="flex flex-row-reverse md:order-2 w-1/4 space-x-3 md:space-x-0 ">
 
-                        <div className="flex justify-around px-5 gap-3">
-                            <Button type="icon" width="w-10" paddingX="px-3">
-                                <UserIcon className={`w-5 h-5 text-neutral-950`} />
+                        <div className="flex justify-around px-5 gap-3 ">
+                            <Button type="icon" width="w-10" paddingX="px-2.5"  onClick={toggleMenu}>
+                                <UserIcon className={`w-5 h-5 text-neutral-950`}/>
                             </Button>
                             <Button type="icon" width="w-10" paddingX="px-2.5">
                                 <ShoppingCartIcon className={`w-5 h-5 text-neutral-950`} />

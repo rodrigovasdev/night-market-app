@@ -15,13 +15,11 @@ export default function Jumbotron() {
                 <form action="" className="w-4/5 md:w-1/3 mx-auto">
                     <div className="flex">
                         <input type="text" className="bg-white justify-self-center ps-5 p-2 items-center rounded-full w-full border-1 border-gray-300" name="" placeholder="jhon.doe@mail.com" id="" />
-                        
-                        <div className="hover:bg-neutral-100">
-                            <Button type="icon" aux="absolute right-10 " width="w-0" paddingX="px-0" >
-                                <PaperAirplaneIcon className="w-5 h-5 "/>
+                        <div className="relative hover:scale-110 transition-all duration-150">
+                            <Button type="icon" aux="absolute right-10" width="w-0" paddingX="px-0">
+                                <PaperAirplaneIcon className="w-5 h-5" />
                             </Button>
                         </div>
-
                     </div>
                 </form>
 
