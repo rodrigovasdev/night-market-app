@@ -9,11 +9,12 @@ interface ButtonProps {
     children?: React.ReactNode;
     aux?: string;
     href?: string;
+    onClick?: () => void
 }
 
 import Link from "next/link";
 
-  const Button = ({ variant, content = "default", type = "text", children, width = "w-20", heigth = "h-10" , paddingY = "py-2" , paddingX = "px-4", aux, href = '' }: ButtonProps) => {
+  const Button = ({ variant, content = "default", type = "text", children, width = "w-20", heigth = "h-10" , paddingY = "py-2" , paddingX = "px-4", aux, href = '', onClick}: ButtonProps) => {
     const sharedClasses = `relative cursor-pointer rounded-full font-semibold text-sm text-align-center ${aux}`;
     const iconClasses = `hover:bg-neutral-100 ${sharedClasses} ${paddingY} ${paddingX} ${width} ${heigth} `
     const arrayClass = variant === "primary"
@@ -22,7 +23,7 @@ import Link from "next/link";
 
     if (type === "icon") {
       return (
-        <button className={iconClasses}>
+        <button className={iconClasses} onClick = {onClick}>
           {children}
         </button>
       );
