@@ -10,14 +10,6 @@ export default function Navbar () {
 
     const [openMenuIndex, setOpenMenuIndex] = useState<number | null>(null);
 
-    const handleMouseOver = (index: number) => {
-        setOpenMenuIndex(index);
-    };
-    
-    const handleMouseOut = () => {
-        setOpenMenuIndex(null);
-    };
-
     const megaMenuData = {
       categories: [
         {
