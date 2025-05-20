@@ -1,6 +1,5 @@
 import OfferCard from "@/app/components/ui/card/OfferCard";
 import Container from "@/app/components/ui/Container";
-import CardContainer from "@/app/components/ui/CardContainer";
 
 export default function OfferCardsSection() {
     return (
