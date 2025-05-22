@@ -21,7 +21,7 @@ export default function Start() {
   };
   return (
     <>
-      <div id="gallery" className="relative w-full h-full md:h-screen bg-gray-200" data-carousel="slide">
+      <div id="gallery" className="relative w-full h-full md:h-screen" data-carousel="slide">
     
         <div className="relative h-56 overflow-hidden rounded-lg md:h-14/15">
           
