@@ -21,7 +21,7 @@ export default function Start() {
   };
   return (
     <>
-      <div id="gallery" className="relative w-full h-full md:h-screen bg-gray-200" data-carousel="slide">
+      <div id="gallery" className="relative w-full h-full md:h-screen" data-carousel="slide">
     
         <div className="relative h-56 overflow-hidden rounded-lg md:h-14/15">
           
@@ -35,7 +35,7 @@ export default function Start() {
               ></Image>
               <div className="flex justify-around px-5 w-3/5 md:w-1/5 gap-6 z-10 absolute top-4/5 md:top-2/3 start-1/2 translate-x-[-50%] translate-y-[-50%]">
                   <Button content="Buy now" width="w-2/5" paddingY="py-3" heigth="h-full" variant="primary"></Button>
-                  <Button type="link" href="#featured" content="Show more" width="w-2/5 text-center " paddingY="py-3"  heigth="h-full" variant="secondary"></Button>
+                  <Button type="link" href="#featured" content="Show more" width="w-3/5 2xl:w-2/5 text-center " paddingY="py-3"  heigth="h-full" variant="secondary"></Button>
               </div>
             </div>
             

@@ -21,7 +21,7 @@ export default function MegaMenuModal({ data, isOpen, onClose }: MegaMenuModalPr
     if (!isOpen) return null;
 
     return (
-      <div  className="fixed top-18 left-0 w-screen h-full bg-opacity-50 z-50">
+      <div  className="fixed top-18 left-0 w-screen h-full bg-opacity-50 z-70">
         <div  onMouseLeave={onClose} className="absolute w-full mx-auto bg-white border-1 border-gray-200 cursor-default shadow-lg p-6 pt-7 pb-13">
           <div className="flex justify-center gap-20 w-2/3 mx-auto">
             {data.categories.map((category) => (
