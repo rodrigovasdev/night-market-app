@@ -14,7 +14,7 @@ interface propsTopList{
 function TopSellList(props: propsTopList) {
     const list = props.list
   return (
-    <CardContainer width = "w-full md:w-1/4" padding='py-3' bgClass='bg-white border border-gray-300' margin = 'mb-5'>
+    <CardContainer width = "w-full md:w-1/4" padding='py-5' bgClass='bg-white border border-gray-300' margin = 'mb-5'>
         <span className = "font-bold text-md mx-5">Top Selling Products</span>
 
         <div className="px-5 my-3">

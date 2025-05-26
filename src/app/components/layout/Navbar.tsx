@@ -9,7 +9,7 @@ import PopUpLogin from "../sections/userLoginRegister/PopUpLogin"
 
 export default function Navbar () {
 
-    const [openMenuIndex, setOpenMenuIndex] = useState<number | null>(null);
+    const [openMegaMenu, setOpenMegaMenu] = useState(false);
 
     const [menuOpen, setMenuOpen] = useState(false)
 
@@ -18,63 +18,9 @@ export default function Navbar () {
         console.log("Hola!")
     }
 
-    const megaMenuData = {
-      categories: [
-        {
-          id: "cat1",
-          name: "Ropa",
-          subcategories: [
-            { id: "sub1", name: "Poleras" },
-            { id: "sub2", name: "Pantalones" },
-            { id: "sub3", name: "Chaquetas" },
-            { id: "sub4", name: "Zapatos" },
-          ],
-        },
-        {
-          id: "cat2",
-          name: "Electrónica",
-          subcategories: [
-            { id: "sub5", name: "Smartphones" },
-            { id: "sub6", name: "Laptops" },
-            { id: "sub7", name: "Accesorios" },
-            { id: "sub8", name: "Tablets" },
-          ],
-        },
-        {
-          id: "cat3",
-          name: "Hogar y Cocina",
-          subcategories: [
-            { id: "sub9", name: "Utensilios de cocina" },
-            { id: "sub10", name: "Electrodomésticos" },
-            { id: "sub11", name: "Decoración" },
-            { id: "sub12", name: "Muebles" },
-          ],
-        },
-        {
-          id: "cat4",
-          name: "Deportes",
-          subcategories: [
-            { id: "sub13", name: "Ropa deportiva" },
-            { id: "sub14", name: "Accesorios fitness" },
-            { id: "sub15", name: "Bicicletas" },
-            { id: "sub16", name: "Camping" },
-          ],
-        },
-        {
-          id: "cat5",
-          name: "Belleza y Salud",
-          subcategories: [
-            { id: "sub17", name: "Maquillaje" },
-            { id: "sub18", name: "Cuidado de la piel" },
-            { id: "sub19", name: "Perfumes" },
-            { id: "sub20", name: "Vitaminas y suplementos" },
-          ],
-        },
-      ],
-    };
     
 
-    const megaMenuData2 = {
+    const megaMenuData = {
       categories: [
         {
           id: "cat1",
@@ -104,64 +50,6 @@ export default function Navbar () {
         },
       ],
     };
-    
-
-    const megaMenuData3 = {
-      categories: [
-        {
-          id: "cat1",
-          name: "Moda Mujer",
-          subcategories: [
-            { id: "sub1", name: "Vestidos" },
-            { id: "sub2", name: "Blusas" },
-            { id: "sub3", name: "Faldas" },
-          ],
-        },
-        {
-          id: "cat2",
-          name: "Moda Hombre",
-          subcategories: [
-            { id: "sub4", name: "Camisas" },
-            { id: "sub5", name: "Jeans" },
-          ],
-        },
-        {
-          id: "cat3",
-          name: "Calzado",
-          subcategories: [
-            { id: "sub6", name: "Zapatillas" },
-            { id: "sub7", name: "Botines" },
-            { id: "sub8", name: "Sandalias" },
-            { id: "sub9", name: "Zapatos formales" },
-          ],
-        },
-      ],
-    };
-    
-
-    const megaMenuData4 = {
-      categories: [
-        {
-          id: "cat1",
-          name: "Bebés",
-          subcategories: [
-            { id: "sub1", name: "Pañales" },
-            { id: "sub2", name: "Leche infantil" },
-            { id: "sub3", name: "Cochecitos" },
-          ],
-        },
-        {
-          id: "cat2",
-          name: "Juguetes",
-          subcategories: [
-            { id: "sub4", name: "Juguetes educativos" },
-            { id: "sub5", name: "Muñecos" },
-            { id: "sub6", name: "Autos y pistas" },
-          ],
-        },
-      ],
-    };
-    
 
     return (
 
@@ -183,7 +71,7 @@ export default function Navbar () {
                     <div className="flex flex-row-reverse md:order-2 w-1/4 space-x-3 md:space-x-0 ">
 
                         <div className="flex justify-around px-5 gap-3">
-                            <Button type="icon" width="w-10" paddingX="px-2.5" onClick={toggleMenu}>
+                            <Button type="icon" width="w-10" paddingX="px-2.5" border="border-none" onClick={toggleMenu}>
                                 <UserIcon className={`w-5 h-5 text-neutral-950`} />
                             </Button>
                             <Button type="icon" width="w-10" paddingX="px-2.5" border="border-none">
@@ -212,21 +100,18 @@ export default function Navbar () {
                     
                     <div className="hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
                         <ul className="flex flex-col items-center cursor-pointer p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white">
-                        <li className="hover:border-b-2 px-1.5 ">
-                            <Link onMouseOver={() => setOpenMenuIndex(0)} href="/" className="block py-2 px-3 text-gray-600 hover:text-gray-950 md:p-0">Home</Link>
-                            <MegaMenuModal data={megaMenuData} isOpen={openMenuIndex == 0} onClose={() => setOpenMenuIndex(null)} />
+                        <li onMouseOver={() => setOpenMegaMenu(false)} className="hover:border-b-2 px-1.5 ">
+                            <Link href="/" className="block py-2 px-3 text-gray-600 hover:text-gray-950 md:p-0">Home</Link>
                         </li>
-                        <li className="hover:border-b-2 px-1.5  ">
-                            <Link onMouseOver={() => setOpenMenuIndex(1)} href="/products" className="block py-2 px-3 text-gray-600 hover:text-gray-950 md:p-0">Products</Link>
-                            <MegaMenuModal data={megaMenuData2} isOpen={openMenuIndex == 1} onClose={() => setOpenMenuIndex(null)} />
+                        <li className="hover:border-b-2 px-1.5">
+                            <Link onMouseOver={() => setOpenMegaMenu(true)} href="/products" className="block py-2 px-3 text-gray-600 hover:text-gray-950 md:p-0">Products</Link>
+                            <MegaMenuModal data={megaMenuData} isOpen={openMegaMenu} onClose={() => setOpenMegaMenu(false)} />
                         </li>
-                        <li className="hover:border-b-2 px-1.5   ">
-                            <Link onMouseOver={() => setOpenMenuIndex(2)} href="/products/details" className="block py-2 px-3 text-gray-600 hover:text-gray-950 md:p-0">SectionB</Link>
-                            <MegaMenuModal data={megaMenuData3} isOpen={openMenuIndex == 2} onClose={() => setOpenMenuIndex(null)} />
+                        <li onMouseOver={() => setOpenMegaMenu(false)} className="hover:border-b-2 px-1.5">
+                            <Link href="/admin" className="block py-2 px-3 text-gray-600 hover:text-gray-950 md:p-0">Dashboard</Link>
                         </li>
-                        <li className="hover:border-b-2 px-1.5 ">
-                            <Link onMouseOver={() => setOpenMenuIndex(3)} href="/checkout" className="block py-2 px-3 text-gray-600 hover:text-gray-950 md:p-0">SectionC</Link>
-                            <MegaMenuModal data={megaMenuData4} isOpen={openMenuIndex == 3} onClose={() => setOpenMenuIndex(null)} />
+                        <li onMouseOver={() => setOpenMegaMenu(false)} className="hover:border-b-2 px-1.5">
+                            <Link href="/admin#admin" className="block py-2 px-3 text-gray-600 hover:text-gray-950 md:p-0">Admin</Link>
                         </li>
                         </ul>
                     </div>
