@@ -5,7 +5,7 @@ import Button from "@/app/components/ui/Button";
 export default function FeaturedProducts() {
 
     return (
-        <Container> 
+        <Container id="featured"> 
             <CardContainer>
                  <div className="flex py-5 pb-15 items-center justify-between">
                         <h1 className="font-bold text-4xl ">FEATURED PRODUCTS</h1>

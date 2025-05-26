@@ -14,7 +14,7 @@ function AdminInfoCard(props:AdminCarProps) {
     const {title, value, percentage, secondTitle, children} = props
   return (
     <>
-        <CardContainer width = "w-full md:w-md" padding='py-4' bgClass='bg-white border border-gray-300' margin = 'm-0'>
+        <CardContainer width = "w-full md:w-sm" padding='py-4 -px-5' bgClass='bg-white border border-gray-300' margin = 'm-0'>
             <div className = "mx-5 flex flex-col">
                 <div className = "flex justify-between">
                     <span className = "font-semibold text-neutral-500 my-auto">{title}</span>
