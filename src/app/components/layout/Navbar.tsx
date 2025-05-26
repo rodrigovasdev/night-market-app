@@ -5,10 +5,18 @@ import { UserIcon, ShoppingCartIcon } from "@heroicons/react/24/solid"
 import Link from "next/link"
 import MegaMenuModal from "@/app/components/ui/MegaMenuModal"
 import { useState } from "react"
+import PopUpLogin from "../sections/userLoginRegister/PopUpLogin"
 
 export default function Navbar () {
 
     const [openMenuIndex, setOpenMenuIndex] = useState<number | null>(null);
+
+    const [menuOpen, setMenuOpen] = useState(false)
+
+    const toggleMenu = () =>{
+        setMenuOpen(!menuOpen)
+        console.log("Hola!")
+    }
 
     const megaMenuData = {
       categories: [
@@ -157,20 +165,25 @@ export default function Navbar () {
 
     return (
 
-            <nav className="bg-white w-full sticky z-60 top-0 start-0 border-b border-gray-200">
-                <div className="flex justify-between md:justify-around p-4">
+            <nav className="bg-white w-full z-60 top-0 start-0 sticky border-b border-gray-200">
 
-                    <div className="w-1/4 my-auto ">
-                        <a href="#" className="flex">
+                {menuOpen && 
+                    <PopUpLogin onClick={toggleMenu}></PopUpLogin>
+                }
+
+                <div className="flex justify-between p-4">
+
+                    <div className="w-1/4 ">
+                        <Link href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
                             {/* <img src="https://flowbite.com/docs/images/logo.svg" className="h-8" alt="Flowbite Logo"/> */}
                             <span className="self-center text-2xl font-semibold whitespace-nowrap">N-Market</span>
-                        </a>
+                        </Link>
                     </div>
                     
                     <div className="flex flex-row-reverse md:order-2 w-1/4 space-x-3 md:space-x-0 ">
 
-                        <div className="hidden md:flex justify-around px-5 gap-3">
-                            <Button type="icon" width="w-10" paddingX="px-2.5" border="border-none">
+                        <div className="flex justify-around px-5 gap-3">
+                            <Button type="icon" width="w-10" paddingX="px-2.5" onClick={toggleMenu}>
                                 <UserIcon className={`w-5 h-5 text-neutral-950`} />
                             </Button>
                             <Button type="icon" width="w-10" paddingX="px-2.5" border="border-none">
