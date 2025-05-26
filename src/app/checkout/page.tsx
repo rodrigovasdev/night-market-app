@@ -5,14 +5,14 @@ import Button from "../components/ui/Button";
 export default function Checkout() {
     //DEJAR EL PADDING MEDIANTE PROPS EN EL COMPONENTE CONTAINER
     return (
-        <div className="w-6/8 h-full flex flex-row py-10 gap-10 px-8 mx-auto md:h-screen bg-white ">
+        <div className="w-full md:w-7/8 2xl:w-6/8 h-full flex flex-col md:flex-row py-10 gap-10 px-4 md:px-8 mx-auto md:h-screen bg-white ">
             <div className="basis-2/3">
                 <div className="flex w-full mx-auto flex-col rounded-xl border-1 border-gray-300">
-                    <div className="flex px-10 py-10 items-center justify-between">
+                    <div className="flex px-10 py-3 md:py-10 items-center justify-between border-b-1 border-gray-300 md:border-0">
                         <h1 className="font-bold text-4xl">SHOPPING CART</h1>
                         <ShoppingCartIcon className={`w-8 h-8 text-neutral-950`} />
                     </div>
-                    <div className="flex flex-col gap-3 px-10 pb-10">
+                    <div className="flex flex-col py-3 gap-3 px-2 md:px-10 pb-10">
                         <CheckoutCard/>
                         <CheckoutCard/>
                         <CheckoutCard/>

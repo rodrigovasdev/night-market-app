@@ -157,11 +157,11 @@ export default function Navbar () {
 
     return (
 
-            <nav className="bg-white w-full z-60 top-0 start-0 sticky border-b border-gray-200">
-                <div className="flex justify-between p-4">
+            <nav className="bg-white w-full sticky z-60 top-0 start-0 border-b border-gray-200">
+                <div className="flex justify-between md:justify-around p-4">
 
-                    <div className="w-1/4 ">
-                        <a href="#" className="flex items-center space-x-3 rtl:space-x-reverse">
+                    <div className="w-1/4 my-auto ">
+                        <a href="#" className="flex">
                             {/* <img src="https://flowbite.com/docs/images/logo.svg" className="h-8" alt="Flowbite Logo"/> */}
                             <span className="self-center text-2xl font-semibold whitespace-nowrap">N-Market</span>
                         </a>
@@ -169,11 +169,11 @@ export default function Navbar () {
                     
                     <div className="flex flex-row-reverse md:order-2 w-1/4 space-x-3 md:space-x-0 ">
 
-                        <div className="flex justify-around px-5 gap-3">
-                            <Button type="icon" width="w-10" paddingX="px-2.5">
+                        <div className="hidden md:flex justify-around px-5 gap-3">
+                            <Button type="icon" width="w-10" paddingX="px-2.5" border="border-none">
                                 <UserIcon className={`w-5 h-5 text-neutral-950`} />
                             </Button>
-                            <Button type="icon" width="w-10" paddingX="px-2.5">
+                            <Button type="icon" width="w-10" paddingX="px-2.5" border="border-none">
                                 <ShoppingCartIcon className={`w-5 h-5 text-neutral-950`} />
                             </Button>
                         </div>
