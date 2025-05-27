@@ -31,6 +31,12 @@ import Link from "next/link";
   hover:scale-120 hover:border-transparent ${sharedClasses} ${paddingY} ${paddingX} ${width} ${heigth} ${border}`;
 
     if (type === "icon" && content == null) {
+      if (href != null){
+        return (
+        <Link href={href} className={iconButtonClasses} onClick = {onClick}>
+          {children}
+        </Link>)
+      }
       return (
         <button className={iconButtonClasses} onClick = {onClick}>
           {children}

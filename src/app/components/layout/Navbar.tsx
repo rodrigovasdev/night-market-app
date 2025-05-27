@@ -74,7 +74,7 @@ export default function Navbar () {
                             <Button type="icon" width="w-10" paddingX="px-2.5" border="border-none" onClick={toggleMenu}>
                                 <UserIcon className={`w-5 h-5 text-neutral-950`} />
                             </Button>
-                            <Button type="icon" width="w-10" paddingX="px-2.5" border="border-none">
+                            <Button href="/checkout" type="icon" width="w-10" paddingX="px-2.5" border="border-none">
                                 <ShoppingCartIcon className={`w-5 h-5 text-neutral-950`} />
                             </Button>
                         </div>
