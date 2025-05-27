@@ -5,7 +5,7 @@ import Button from "../components/ui/Button";
 export default function Checkout() {
     //DEJAR EL PADDING MEDIANTE PROPS EN EL COMPONENTE CONTAINER
     return (
-        <div className="w-full md:w-7/8 2xl:w-6/8 h-full flex flex-col md:flex-row py-10 gap-10 px-4 md:px-8 mx-auto md:h-screen bg-white ">
+        <div className="w-full md:w-7/8 2xl:w-6/8 h-full flex flex-col md:flex-row py-10 gap-10 px-5 md:px-20 mx-auto md:h-screen bg-white ">
             <div className="basis-2/3">
                 <div className="flex w-full mx-auto flex-col rounded-xl border-1 border-gray-300">
                     <div className="flex px-10 py-3 md:py-10 items-center justify-between border-b-1 border-gray-300 md:border-0">

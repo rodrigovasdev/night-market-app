@@ -8,7 +8,7 @@ export default function Jumbotron() {
         <Container>
             <CardContainer>
                 <EnvelopeIcon className="w-10 h-10 mx-auto"/>
-                <h1 className="font-bold text-4xl text-center w-2/8 2xl:w-1/8 mx-auto py-5 ">STAY UPDATED</h1>
+                <h1 className="font-bold text-4xl text-center w-3/8 sm:w-1/4 2xl:w-1/8 mx-auto py-5 ">STAY UPDATED</h1>
                 
                 <div className="w-4/5 p-5 mx-auto md:w-full md:mx-0 text-center">
                     <span className="w-auto text-center" >Suscribe to receive exclusive offers, updates, and the latest news from N-Market!</span>
