@@ -22,15 +22,15 @@ const listItems = ['Mejor precio', 'Mejor calidad', 'Más vendidos', 'Más nuevo
   return (
     <>
       <OffCanva title='FILTER' onClick={() => setIsOpen(false) } isOpen={isOpen}>
-        <div className='flex flex-col h-full'>
+        <div className='flex flex-col h-full gap-3'>
           <div>
-          <Accordion items={listItems} title='FILTER'/>
-          <Accordion items={listItems} title='TYPE'/>
-          <Accordion items={listItems} title='COLOR'/>
-          <Accordion items={listItems} title='SIZE'/>
-          <Accordion items={listItems} title='DISCOUNTS'/>
+            <Accordion items={listItems} title='FILTER'/>
+            <Accordion items={listItems} title='TYPE'/>
+            <Accordion items={listItems} title='COLOR'/>
+            <Accordion items={listItems} title='SIZE'/>
+            <Accordion items={listItems} title='DISCOUNTS'/>
           </div>
-          <div className='mx-auto w-full'>
+          <div className='w-full flex justify-center '>
             <Button variant='primary' content='Apply' width='w-2/3 mx-auto'></Button>
 
           </div>

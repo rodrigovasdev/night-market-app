@@ -9,7 +9,17 @@ import { useState } from 'react';
 
 const Accordion = ({ title, children, items, defaultOpen = false } : AccordionProps) => {
   const [isOpen, setIsOpen] = useState(defaultOpen);
-  const [isChecked, setIsChecked] = useState(false);
+  const [optionSelected, setOptionSelected] = useState<string[]>([]);
+
+  // Función para manejar el cambio de selección
+  const handleOptionChange = (item: string, checked: boolean) => {
+    if (checked) {
+      setOptionSelected((prev) => [...prev, item]);
+    } else {
+      setOptionSelected((prev) => prev.filter((i) => i !== item));
+    }
+  };
+
 
   return (
     <div className={`w-full overflow-hidden `}>
@@ -39,21 +49,22 @@ const Accordion = ({ title, children, items, defaultOpen = false } : AccordionPr
       >
         {items && items.length > 0 ? (
           items.map((item) => (
-            <div key={item} className="flex items-center gap-2 px-4 py-2.5 border-b-1 border-gray-200">
-              <input
-                type="checkbox"
-                checked={isChecked}
-                onChange={(e) => {
-                  e.stopPropagation();
-                  setIsChecked(e.target.checked);
-                }}
-                name=""
-                id=""
-              />
-              <label className="cursor-pointer font-semibold" htmlFor="">
-                {item}
-              </label>
-            </div>
+            <label
+      key={item}
+      htmlFor={item}
+      onClick={() => handleOptionChange(item, !optionSelected.includes(item))} // Evita que el click cierre el acordeón
+      className="flex items-center gap-2 px-4 py-2.5 border-b-1 border-gray-200 cursor-pointer w-full"
+    >
+      <input
+        type="checkbox"
+        checked={optionSelected.includes(item)}
+        onChange={(e) => handleOptionChange(item, e.target.checked)}
+        name={item}
+        id={item}
+        className="cursor-pointer"
+      />
+      <span className="font-semibold">{item}</span>
+    </label>
           ))
         ) : (
           <div>
