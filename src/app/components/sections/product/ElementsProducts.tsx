@@ -19,16 +19,21 @@ function ElementosProducts() {
         productElements.push(<CardProducts key={i} />);
       }
 const listItems = ['Mejor precio', 'Mejor calidad', 'Más vendidos', 'Más nuevos'];
+const listItems2 = ['Electronics', 'Computers', 'Gaming', 'Streaming'];
+const listItems3 = ['Black', 'White', 'Red', 'Blue'];
+const listItems4 = ['S', 'M', 'L', 'XL'];
+const listItems5 = ['10% off', '20% off', '30% off', '40% off'];
+
   return (
     <>
       <OffCanva title='FILTER' onClick={() => setIsOpen(false) } isOpen={isOpen}>
         <div className='flex flex-col h-full gap-3'>
           <div>
             <Accordion items={listItems} title='FILTER'/>
-            <Accordion items={listItems} title='TYPE'/>
-            <Accordion items={listItems} title='COLOR'/>
-            <Accordion items={listItems} title='SIZE'/>
-            <Accordion items={listItems} title='DISCOUNTS'/>
+            <Accordion items={listItems2} title='CATEGORIES'/>
+            <Accordion items={listItems3} title='COLOR'/>
+            <Accordion items={listItems4} title='SIZE'/>
+            <Accordion items={listItems5} title='DISCOUNTS'/>
           </div>
           <div className='w-full flex justify-center '>
             <Button variant='primary' content='Apply' width='w-2/3 mx-auto'></Button>
