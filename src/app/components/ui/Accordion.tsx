@@ -52,7 +52,7 @@ const Accordion = ({ title, children, items, defaultOpen = false } : AccordionPr
             <label
       key={item}
       htmlFor={item}
-      onClick={() => handleOptionChange(item, !optionSelected.includes(item))} // Evita que el click cierre el acordeón
+      onClick={() => handleOptionChange(item, optionSelected.includes(item))} // Evita que el click cierre el acordeón
       className="flex items-center gap-2 px-4 py-2.5 border-b-1 border-gray-200 cursor-pointer w-full"
     >
       <input
