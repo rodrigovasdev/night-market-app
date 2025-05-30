@@ -126,11 +126,11 @@ export default function Navbar () {
                                 </li>
                             </Link>
 
-                            <Link href="/admin#admin" className="block mx-auto py-2 px-3 text-gray-950 md:p-0">
+                            {/* <Link href="/admin#admin" className="block mx-auto py-2 px-3 text-gray-950 md:p-0">
                                 <li onMouseOver={() => setOpenMegaMenu(false)} className="hover:border-b-2 px-1.5">
                                     Admin
                                 </li>
-                            </Link>
+                            </Link> */}
                         </ul>
                     </div>
                 </div>
