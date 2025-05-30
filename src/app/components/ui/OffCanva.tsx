@@ -13,7 +13,6 @@ export default function OffCanva(props: OffCanvaProps) {
 
     return (
         <>
-
             <div
                 className={`fixed inset-0 z-90 bg-black/50 transition-opacity duration-300 ${
                     isOpen ? 'opacity-100 visible' : 'opacity-0 invisible'

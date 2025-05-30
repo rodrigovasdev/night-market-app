@@ -1,6 +1,7 @@
 "use client";
 
 import Button from "@/app/components/ui/Button"
+import SearchSection from "@/app/components/sections/search/SearchSection";
 import { UserIcon, ShoppingCartIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline"
 import Link from "next/link"
 import MegaMenuModal from "@/app/components/ui/MegaMenuModal"
@@ -12,6 +13,7 @@ export default function Navbar () {
     const [openMegaMenu, setOpenMegaMenu] = useState(false);
 
     const [menuOpen, setMenuOpen] = useState(false)
+    const [searchSectionOpen, setSearchSectionOpen] = useState(false)
 
     const toggleMenu = () =>{
         setMenuOpen(!menuOpen)
@@ -56,6 +58,10 @@ export default function Navbar () {
                     <PopUpLogin onClick={toggleMenu}></PopUpLogin>
                 }
 
+                {
+                    <SearchSection onClick={() => setSearchSectionOpen(false)} isOpen={searchSectionOpen}/>
+                }
+
                 <div className="flex justify-between px-4 md:px-0 py-4">
 
                     <div className="w-1/4 my-auto ">
@@ -68,10 +74,10 @@ export default function Navbar () {
                     <div className="flex flex-row-reverse md:order-2 w-1/4 space-x-3 md:space-x-0 ">
 
                         <div className="hidden md:flex justify-around gap-3">
-                            <Button type="icon" width="w-10" paddingX="px-2.5" border="border-none">
+                            <Button type="icon" width="w-10" paddingX="px-2.5" onClick={() => setSearchSectionOpen(true)} border="border-none">
                                 <MagnifyingGlassIcon className={`w-6 h-6 text-neutral-950`} />
                             </Button>
-                            <Button type="icon" width="w-10" paddingX="px-2.5" onClick={toggleMenu} border="border-none">
+                            <Button href='' type="icon" width="w-10" paddingX="px-2.5" onClick={toggleMenu} border="border-none">
                                 <UserIcon className={`w-6 h-6 text-neutral-950`} />
                             </Button>
                             <Button href="/checkout" type="icon" width="w-10" paddingX="px-2.5" border="border-none">
