@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 interface Subcategory {
     id: string;
     name: string;
@@ -30,8 +32,10 @@ export default function MegaMenuModal({ data, isOpen, onClose }: MegaMenuModalPr
                 <ul className="space-y-1">
                   {category.subcategories.map((sub) => (
                     <li key={sub.id} className="text-sm text-gray-700 hover:underline cursor-pointer">
-                      {sub.name}
-                    </li>
+                        <Link key={sub.id} href='/products'>
+                          {sub.name}
+                        </Link>
+                      </li>
                   ))}
                 </ul>
               </div>
