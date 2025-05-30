@@ -3,7 +3,7 @@ import AdminInfoCard from '../components/ui/card/AdminInfoCard'
 import TopSellList from '../components/ui/TopSellList'
 import { CurrencyDollarIcon, ShoppingCartIcon, CreditCardIcon, CubeIcon} from '@heroicons/react/24/outline'
 import GraphicSales from '../components/ui/GraphicSales'
-import ProductManagement from '../components/ui/card/ProductManagement'
+// import ProductManagement from '../components/ui/card/ProductManagement'
 import CardContainer from '../components/ui/CardContainer'
 
 
@@ -55,11 +55,11 @@ function page() {
         </div>
       </section>
       <div className="h-0.5 mx-10 bg-neutral-300 mt-5 rounded"></div>
-
+{/* 
       <section id='admin' className = "h-screen py-5 px-5 md:px-40">
         <h1 className="font-bold text-4xl text-start ">Product Management</h1>
         <ProductManagement></ProductManagement>
-      </section>
+      </section> */}
     </>
   )
 }
