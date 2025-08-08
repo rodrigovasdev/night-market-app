@@ -44,7 +44,7 @@ function InfoDetail() {
                 <div className = "flex flex-col pt-10 overflow-hidden max-h-40">
                     <div className = "flex flex-row">
                         <div className = "flex flex-col text-center">
-                            <Image className="rounded-full h-25 w-25" src="/assets/gorda.jpg"alt="Producto" width = {300} height = {300}/>
+                            {/* <Image className="rounded-full h-25 w-25" src="/assets/gorda.jpg"alt="Producto" width = {300} height = {300}/> */}
                             <span className = "font-semibold">Josefa</span>
                         </div>
                         <div className = "flex flex-col pl-5">
