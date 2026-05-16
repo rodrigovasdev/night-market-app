@@ -1,28 +1,30 @@
 "use client";
 
-import React, {useState} from 'react'
-import CardProducts from "@/app/components/ui/card/ProductCard";
+import React, { useState, useEffect } from 'react'
+import ProductCard from "@/app/components/ui/card/ProductCard";
 import OffCanva from "@/app/components/ui/OffCanva";
 import Button from "@/app/components/ui/Button";
 import Accordion from '../../ui/Accordion';
 import { AdjustmentsHorizontalIcon } from '@heroicons/react/24/outline';
-import { JSX } from "react";
+import { getProducts } from "@/services/products.service";
+import { Product } from '@/types/product.types';
 
 
 
 function ElementosProducts() {
 
   const [isOpen, setIsOpen] = useState(false);
-    const productElements: JSX.Element[] = [];
-
-    for (let i = 0; i < 12; i++) {
-        productElements.push(<CardProducts key={i} />);
-      }
+  const [products, setProducts] = useState<Product[]>([]);
 const listItems = ['Mejor precio', 'Mejor calidad', 'Más vendidos', 'Más nuevos'];
 const listItems2 = ['Electronics', 'Computers', 'Gaming', 'Streaming'];
 const listItems3 = ['Black', 'White', 'Red', 'Blue'];
 const listItems4 = ['S', 'M', 'L', 'XL'];
 const listItems5 = ['10% off', '20% off', '30% off', '40% off'];
+  useEffect(() => {
+    getProducts()
+      .then((data) => setProducts(data))
+      .catch((err) => console.error(err));
+  }, []);
 
   return (
     <>
@@ -49,7 +51,15 @@ const listItems5 = ['10% off', '20% off', '30% off', '40% off'];
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-4 gap-3 justify-items-center">
-              {productElements}
+              {products.map((product) => (
+                <ProductCard
+                  key={product.id}
+                  title={product.name}
+                  shortDescription={product.shortDescription}
+                  price={`$${product.price}`}
+                  imageUrl={product.images[0]?.url || '/assets/ecommerce.jpg'}
+                />
+              ))}
         </div>
       </section>
     </>
