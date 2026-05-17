@@ -12,4 +12,5 @@ export interface Product {
   price: number;
   visits: number;
   images: ProductImage[];
+  specifications?: string;
 }
