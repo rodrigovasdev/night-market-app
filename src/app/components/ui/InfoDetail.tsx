@@ -5,7 +5,7 @@ import { useState } from 'react'
 //import Image from "next/image";
 import { Star } from "lucide-react";
 
-function InfoDetail() {
+function InfoDetail({ specifications }: { specifications: string }) {
 
     const [isOptionSelected, setIsOptionSelected] = useState(0)
 
@@ -21,24 +21,7 @@ function InfoDetail() {
         )}
         </div>
         <div className = "h-40">
-            {isOptionSelected === 0 && <p className = "text-md pt-5 overflow-hidden max-h-40"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                Proin nec varius libero. Nulla facilisi. Cras pellentesque felis ut consectetur blandit. Nam eget augue euismod, 
-                gravida nisi ac, 
-                interdum neque. 
-                Fusce nec tincidunt est. Integer p
-                retium vestibulum risus, sit amet rutrum nisi suscipit quis. Aenean sed justo sed justo facilisis pulvinar.
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                Proin nec varius libero. Nulla facilisi. Cras pellentesque felis ut consectetur blandit. Nam eget augue euismod, 
-                gravida nisi ac, 
-                interdum neque. 
-                Fusce nec tincidunt est. Integer p
-                retium vestibulum risus, sit amet rutrum nisi suscipit quis. Aenean sed justo sed justo facilisis pulvinar.
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                Proin nec varius libero. Nulla facilisi. Cras pellentesque felis ut consectetur blandit. Nam eget augue euismod, 
-                gravida nisi ac, 
-                interdum neque. 
-                Fusce nec tincidunt est. Integer p
-                retium vestibulum risus, sit amet rutrum nisi suscipit quis. Aenean sed justo sed justo facilisis pulvinar.</p>}
+            {isOptionSelected === 0 && <p className = "text-md pt-5 overflow-hidden max-h-40">{specifications}</p>}
             {isOptionSelected === 1 && <p className = "text-md pt-5 overflow-hidden max-h-40">Esto es informacion adicional de prueba</p>}
             {isOptionSelected === 2 && 
                 <div className = "flex flex-col pt-10 overflow-hidden max-h-40">
