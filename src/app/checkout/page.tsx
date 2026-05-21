@@ -12,6 +12,7 @@ import { useCartStore } from "@/store/cart.store";
 import { syncCart, checkoutCart, CartCalculation } from "@/services/cart.service";
 import { useUserStore } from "@/store/user.store";
 import { formatPriceCLP } from "@/utils/formatPrice";
+import { toast } from "sonner";
 
 export default function Checkout() {
     const router = useRouter();
@@ -29,12 +30,13 @@ export default function Checkout() {
     const [isLoading, setIsLoading] = useState(false);
     const [checkoutError, setCheckoutError] = useState<string | null>(null);
     const isDiscountApplied = Boolean(calculation?.discountApplied);
+    const canApplyDiscount = discountCode.trim().length > 0;
 
     useEffect(() => {
         syncCart(items, appliedDiscountCode).then(setCalculation);
     }, [items, appliedDiscountCode]);
 
-    function handleApplyDiscount() {
+    async function handleApplyDiscount() {
         if (isDiscountApplied) {
             setShowThanksMessage((prev) => !prev);
             return;
@@ -42,8 +44,24 @@ export default function Checkout() {
 
         const normalizedCode = discountCode.trim() || undefined;
         setShowThanksMessage(false);
-        setAppliedDiscountCode(normalizedCode);
-        syncCart(items, normalizedCode).then(setCalculation);
+
+        if (!normalizedCode) {
+            setAppliedDiscountCode(undefined);
+            const nextCalculation = await syncCart(items);
+            setCalculation(nextCalculation);
+            return;
+        }
+
+        const nextCalculation = await syncCart(items, normalizedCode);
+        setCalculation(nextCalculation);
+
+        if (nextCalculation?.discountApplied) {
+            setAppliedDiscountCode(normalizedCode);
+            return;
+        }
+
+        setAppliedDiscountCode(undefined);
+        toast.error("El codigo de descuento es invalido o ya fue utilizado.");
     }
 
     const hasItems = itemCount > 0;
@@ -217,6 +235,7 @@ export default function Checkout() {
                                     width="w-full"
                                     variant={isDiscountApplied ? "success" : "secondary"}
                                     onClick={handleApplyDiscount}
+                                    disabled={!isDiscountApplied && !canApplyDiscount}
                                 />
                             </div>
                             <div className="px-10 flex flex-col gap-3 py-10">
