@@ -47,7 +47,24 @@ export default function ReviewCarousel({ productId }: ReviewCarouselProps) {
     }, [productId]);
 
     if (isLoading) {
-        return <p className="pt-5 text-sm text-gray-500">Cargando reseñas...</p>;
+        return (
+            <div className="flex items-center gap-3 pt-5 animate-pulse" aria-hidden="true">
+                <div className="w-7 h-7 rounded-full bg-gray-200" />
+
+                <div className="flex-1 rounded-xl border border-gray-200 p-4 bg-white space-y-3">
+                    <div className="flex items-center justify-between">
+                        <div className="h-4 w-1/3 bg-gray-200 rounded" />
+                        <div className="h-4 w-1/4 bg-gray-100 rounded" />
+                    </div>
+                    <div className="h-4 w-full bg-gray-100 rounded" />
+                    <div className="h-4 w-11/12 bg-gray-100 rounded" />
+                    <div className="h-4 w-2/3 bg-gray-100 rounded" />
+                    <div className="h-3 w-14 bg-gray-100 rounded" />
+                </div>
+
+                <div className="w-7 h-7 rounded-full bg-gray-200" />
+            </div>
+        );
     }
 
     const hasReviews = reviews.length > 0;
