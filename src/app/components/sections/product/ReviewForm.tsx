@@ -9,6 +9,7 @@ import { useUserStore } from '@/store/user.store'
 import { createProductReview } from '@/services/products.service'
 import { toast } from 'sonner'
 import ReviewCard from '@/app/components/ui/ReviewCard'
+import Loading from '@/app/components/ui/Loading'
 
 interface ReviewFormProps {
   productId: number;
@@ -23,6 +24,7 @@ export default function ReviewForm({ productId }: ReviewFormProps) {
 
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: storedName || '',
     email: storedMail || '',
@@ -43,6 +45,7 @@ export default function ReviewForm({ productId }: ReviewFormProps) {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (isSubmitting) return;
 
     const payload = {
       username: formData.name,
@@ -51,17 +54,22 @@ export default function ReviewForm({ productId }: ReviewFormProps) {
       reviewText: formData.comments,
     };
 
-    const ok = await createProductReview(productId, payload);
-    if (!ok) {
-      toast.error('No se pudo enviar la reseña');
-      return;
-    }
+    setIsSubmitting(true);
+    try {
+      const ok = await createProductReview(productId, payload);
+      if (!ok) {
+        toast.error('No se pudo enviar la reseña');
+        return;
+      }
 
-    saveSentReview({ productId, ...payload });
-    setRating(0);
-    setHover(0);
-    setFormData((prev) => ({ ...prev, comments: '' }));
-    toast.success('Reseña enviada con éxito');
+      saveSentReview({ productId, ...payload });
+      setRating(0);
+      setHover(0);
+      setFormData((prev) => ({ ...prev, comments: '' }));
+      toast.success('Reseña enviada con éxito');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -87,6 +95,7 @@ export default function ReviewForm({ productId }: ReviewFormProps) {
             value={formData.name}
             onChange={handleChange}
             placeholder="Max Gonzalez"
+            disabled={isSubmitting}
             required
           />
           <FormField
@@ -97,6 +106,7 @@ export default function ReviewForm({ productId }: ReviewFormProps) {
             value={formData.email}
             onChange={handleChange}
             placeholder="max@correo.cl"
+            disabled={isSubmitting}
             required
           />
           <div>
@@ -107,10 +117,10 @@ export default function ReviewForm({ productId }: ReviewFormProps) {
                   key={star}
                   fill="currentColor"
                   stroke="none"
-                  className={`w-6 h-6 cursor-pointer transition-colors ${star <= (hover || rating) ? 'text-yellow-400' : 'text-gray-300'}`}
-                  onMouseEnter={() => setHover(star)}
+                  className={`w-6 h-6 transition-colors ${isSubmitting ? 'cursor-not-allowed opacity-60' : 'cursor-pointer'} ${star <= (hover || rating) ? 'text-yellow-400' : 'text-gray-300'}`}
+                  onMouseEnter={() => { if (!isSubmitting) setHover(star); }}
                   onMouseLeave={() => setHover(0)}
-                  onClick={() => setRating(star)}
+                  onClick={() => { if (!isSubmitting) setRating(star); }}
                 />
               ))}
             </div>
@@ -123,8 +133,10 @@ export default function ReviewForm({ productId }: ReviewFormProps) {
             rows={4}
             value={formData.comments}
             onChange={handleChange}
+            disabled={isSubmitting}
           />
-          <Button content='Enviar' width="w-full" paddingY="py-3" heigth="h-full" variant='primary' />
+          <Button content={isSubmitting ? 'Enviando...' : 'Enviar'} width="w-full" paddingY="py-3" heigth="h-full" variant='primary' disabled={isSubmitting} />
+          {isSubmitting && <Loading label="Enviando reseña..." className="mt-3" />}
         </form>
       )}
     </div>
