@@ -18,7 +18,7 @@ export default function RelatedProducts() {
   <div>
     <h2 className="py-5 font-bold text-2xl">Related Products</h2>
     <div className="flex flex-col items-start gap-5">
-      <div className="grid grid-cols-2 gap-3">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
         {isLoading
           ? Array.from({ length: 4 }).map((_, index) => (
               <div
