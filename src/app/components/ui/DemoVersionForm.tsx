@@ -1,0 +1,105 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { toast } from "sonner";
+import Button from "@/app/components/ui/Button";
+import FormField from "@/app/components/ui/FormField";
+import Loading from "@/app/components/ui/Loading";
+import { sendDemoVersionMail } from "@/services/mail.service";
+import { useUserStore } from "@/store/user.store";
+
+interface DemoVersionFormProps {
+    onSuccess?: () => void;
+}
+
+export default function DemoVersionForm({ onSuccess }: DemoVersionFormProps) {
+    const storedName = useUserStore((state) => state.name);
+    const storedMail = useUserStore((state) => state.mail);
+    const isLoggedIn = storedName !== null;
+
+    const [name, setName] = useState(storedName ?? "");
+    const [email, setEmail] = useState(storedMail ?? "");
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
+    useEffect(() => {
+        if (storedName) {
+            setName(storedName);
+        }
+        if (storedMail) {
+            setEmail(storedMail);
+        }
+    }, [storedName, storedMail]);
+
+    async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+        e.preventDefault();
+        if (isSubmitting) return;
+
+        const username = (isLoggedIn ? storedName : name)?.trim() ?? "";
+        const userEmail = (isLoggedIn ? storedMail : email)?.trim() ?? "";
+
+        if (!username || !userEmail) {
+            toast.error("Completa nombre y correo para enviar el formulario.");
+            return;
+        }
+
+        setIsSubmitting(true);
+        try {
+            await sendDemoVersionMail({ username, email: userEmail });
+            toast.success("Solicitud enviada correctamente.");
+            onSuccess?.();
+        } catch {
+            toast.error("No se pudo enviar la solicitud. Intenta nuevamente.");
+        } finally {
+            setIsSubmitting(false);
+        }
+    }
+
+    return (
+        <form onSubmit={handleSubmit} className="w-full md:w-11/12 mx-auto">
+            <div className="flex flex-col gap-2 py-4 items-center">
+                {isLoggedIn ? (
+                    <div className="w-full rounded-xl bg-neutral-100 p-4 mb-2">
+                        <p className="text-base font-semibold">{storedName}</p>
+                        <p className="text-sm text-gray-500">{storedMail ?? "Sin correo registrado"}</p>
+                    </div>
+                ) : (
+                    <>
+                        <FormField
+                            label="Nombre"
+                            id="demo-name"
+                            name="name"
+                            required
+                            disabled={isSubmitting}
+                            placeholder="Max Gonzalez"
+                            className="w-full"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                        />
+                        <FormField
+                            label="Correo"
+                            id="demo-email"
+                            name="email"
+                            type="email"
+                            required
+                            disabled={isSubmitting}
+                            placeholder="max@correo.cl"
+                            className="w-full mb-3"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
+                    </>
+                )}
+
+                <Button
+                    content={isSubmitting ? "Enviando..." : "Enviar"}
+                    width="w-full"
+                    paddingY="py-3"
+                    heigth="h-full"
+                    variant="primary"
+                    disabled={isSubmitting}
+                />
+                {isSubmitting && <Loading label="Enviando solicitud..." className="mt-2" />}
+            </div>
+        </form>
+    );
+}

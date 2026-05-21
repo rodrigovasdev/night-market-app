@@ -3,12 +3,15 @@
 import { useState } from "react";
 import OfferCard from "@/app/components/ui/card/OfferCard";
 import Container from "@/app/components/ui/Container";
+import DemoVersionForm from "@/app/components/ui/DemoVersionForm";
 import NewsletterForm from "@/app/components/ui/NewsletterForm";
 import PopUpContainer from "@/app/components/ui/PopUpContainer";
 import { useUserStore } from "@/store/user.store";
 
 export default function OfferCardsSection() {
     const [isPopupOpen, setIsPopupOpen] = useState(false);
+    const [isDemoPopupOpen, setIsDemoPopupOpen] = useState(false);
+    const [demoFormSent, setDemoFormSent] = useState(false);
     const discountSent = useUserStore((state) => state.discountSent);
 
     return (
@@ -21,8 +24,15 @@ export default function OfferCardsSection() {
                         description="Obtén 20% de descuento solo este fin de semana."
                         bgColor="bg-coral cursor-pointer"
                     />
-                    <OfferCard title="🌟 Versión demo" description="Este sitio corresponde a una demo funcional desarrollada con fines de demostración y portafolio.
-Para consultas, soporte o desarrollo de proyectos similares, puedes contactar al desarrollador en: rodrigo.vasqueze@gmail.com" bgColor="bg-golden"/>
+                    <OfferCard
+                        onClick={() => {
+                            setDemoFormSent(false);
+                            setIsDemoPopupOpen(true);
+                        }}
+                        title="🌟 Versión demo"
+                        description="Demo funcional para portafolio. Haz clic para solicitar más información."
+                        bgColor="bg-golden cursor-pointer"
+                    />
                 </div> 
 
                 {isPopupOpen && (
@@ -39,6 +49,28 @@ Para consultas, soporte o desarrollo de proyectos similares, puedes contactar al
                                 <>
                                     <p className="text-center text-gray-600 pt-2">Completa el formulario y te enviamos la oferta a tu correo.</p>
                                     <NewsletterForm layout="popup" />
+                                </>
+                            )}
+                        </div>
+                    </PopUpContainer>
+                )}
+
+                {isDemoPopupOpen && (
+                    <PopUpContainer onClose={() => setIsDemoPopupOpen(false)}>
+                        <div className="w-full md:w-[36rem]">
+                            <h2 className="text-center text-2xl font-bold">
+                                {demoFormSent ? "Solicitud enviada" : "Solicitar versión demo"}
+                            </h2>
+                            {demoFormSent ? (
+                                <p className="text-center text-gray-600 pt-3 pb-2">
+                                    Gracias por tu interés. Te contactaremos pronto.
+                                </p>
+                            ) : (
+                                <>
+                                    <p className="text-center text-gray-600 pt-2">
+                                        Completa el formulario y te contactamos para ayudarte con un proyecto similar.
+                                    </p>
+                                    <DemoVersionForm onSuccess={() => setDemoFormSent(true)} />
                                 </>
                             )}
                         </div>
