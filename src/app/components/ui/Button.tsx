@@ -10,15 +10,20 @@ interface ButtonProps {
     children?: React.ReactNode;
     aux?: string;
     href?: string;
-    onClick?: () => void
+    onClick?: () => void;
+    disabled?: boolean;
 }
 
 import Link from "next/link";
 
-  const Button = ({ variant, content, type = "text", children, width = "w-20", heigth = "h-10" , paddingY = "py-2" , paddingX = "px-4", aux, href = '',border, onClick}: ButtonProps) => {
+  const Button = ({ variant, content, type = "text", children, width = "w-20", heigth = "h-10" , paddingY = "py-2" , paddingX = "px-4", aux, href = '',border, onClick, disabled}: ButtonProps) => {
     const sharedClasses = `relative cursor-pointer rounded-full font-semibold text-sm text-align-center ${aux}`;
     const arrayClass = variant === "primary"
     ? `text-white bg-neutral-950 hover:bg-neutral-600 ${sharedClasses} ${paddingY} ${paddingX} ${width} ${heigth}`
+    : variant === "success"
+    ? `text-white bg-green-600 hover:bg-green-500 ${sharedClasses} ${paddingY} ${paddingX} ${width} ${heigth}`
+    : variant === "danger"
+    ? `text-white bg-red-600 hover:bg-red-500 ${sharedClasses} ${paddingY} ${paddingX} ${width} ${heigth}`
     : `text-neutral-950 bg-white border-1 border-neutral-200 hover:bg-neutral-100 hover:border-transparent ${sharedClasses} ${paddingY} ${paddingX} ${width} ${heigth}`;
 
     const iconClasses = variant === "primary"
@@ -60,7 +65,7 @@ import Link from "next/link";
     }
     else {
       return (
-      <button className={arrayClass}>
+      <button className={arrayClass} onClick={onClick} disabled={disabled}>
         {content}
       </button>
     );

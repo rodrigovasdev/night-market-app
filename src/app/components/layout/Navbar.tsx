@@ -2,12 +2,12 @@
 
 import Button from "@/app/components/ui/Button"
 import SearchSection from "@/app/components/sections/search/SearchSection";
-import { UserIcon, ShoppingCartIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline"
+import { UserIcon, ShoppingCartIcon } from "@heroicons/react/24/outline"
 import Link from "next/link"
-import MegaMenuModal from "@/app/components/ui/MegaMenuModal"
 import { useState } from "react"
 import PopUpLogin from "../sections/userLoginRegister/PopUpLogin"
-
+import { useUserStore } from '@/store/user.store'
+import { useCartStore } from '@/store/cart.store'
 export default function Navbar () {
 
     const [openMegaMenu, setOpenMegaMenu] = useState(false);
@@ -17,38 +17,10 @@ export default function Navbar () {
 
     const toggleMenu = () =>{
         setMenuOpen(!menuOpen)
-        console.log("Hola!")
     }
-    const megaMenuData = {
-      categories: [
-        {
-          id: "cat1",
-          name: "Computación",
-          subcategories: [
-            { id: "sub1", name: "Monitores" },
-            { id: "sub2", name: "Teclados" },
-            { id: "sub3", name: "Mouses" },
-          ],
-        },
-        {
-          id: "cat2",
-          name: "Gaming",
-          subcategories: [
-            { id: "sub4", name: "Consolas" },
-            { id: "sub5", name: "Juegos" },
-            { id: "sub6", name: "Accesorios gamer" },
-          ],
-        },
-        {
-          id: "cat3",
-          name: "Streaming",
-          subcategories: [
-            { id: "sub7", name: "Webcams" },
-            { id: "sub8", name: "Micrófonos" },
-          ],
-        },
-      ],
-    };
+
+    const name = useUserStore((state) => state.name) || 'Invitado';
+    const itemCount = useCartStore((state) => state.itemCount);
 
     return (
 
@@ -74,14 +46,19 @@ export default function Navbar () {
                     <div className="flex flex-row-reverse md:order-2 w-1/4 space-x-3 md:space-x-0 ">
 
                         <div className="hidden md:flex justify-around gap-3">
-                            <Button type="icon" width="w-10" paddingX="px-2.5" onClick={() => setSearchSectionOpen(true)} border="border-none">
+                            {/* <Button type="icon" width="w-10" paddingX="px-2.5" onClick={() => setSearchSectionOpen(true)} border="border-none">
                                 <MagnifyingGlassIcon className={`w-6 h-6 text-neutral-950`} />
-                            </Button>
-                            <Button href='' type="icon" width="w-10" paddingX="px-2.5" onClick={toggleMenu} border="border-none">
+                            </Button> */}
+                                <Button href="/checkout" type="icon" width="w-10" paddingX="px-2.5" border="border-none">
+                                    <ShoppingCartIcon className={`w-6 h-6 text-neutral-950`} />
+                                    <span className="absolute -top-1 -right-1 bg-neutral-950 text-white text-xs font-bold w-4 h-4 flex items-center justify-center rounded-full pointer-events-none">
+                                        {itemCount}
+                                    </span>
+                                </Button>
+                               
+                            <Button href='' type="icon" width="w-full" aux="flex gap-2.5" paddingX="px-2.5" onClick={toggleMenu} border="border-none">
                                 <UserIcon className={`w-6 h-6 text-neutral-950`} />
-                            </Button>
-                            <Button href="/checkout" type="icon" width="w-10" paddingX="px-2.5" border="border-none">
-                                <ShoppingCartIcon className={`w-6 h-6 text-neutral-950`} />
+                                {name}
                             </Button>
                         </div>
 
@@ -108,23 +85,21 @@ export default function Navbar () {
                         <ul className="flex flex-col gap-8 items-center p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white">
                             <Link href="/" className="block py-2 px-3 mx-auto text-gray-950 md:p-0">
                                 <li onMouseOver={() => setOpenMegaMenu(false)} className="hover:border-b-2 px-1.5">
-                                    Home
+                                    Inicio
                                 </li>
                             </Link>
 
                             <Link onMouseOver={() => setOpenMegaMenu(true)} href="/products" className={`block mx-auto py-2 px-3 text-gray-950 md:p-0 ${openMegaMenu ? 'text-gray-950' : ''}`}>
                                 <li className={`hover:border-b-2 px-1.5 ${openMegaMenu ? 'border-b-2' : ''}`}>
-                                    Products
+                                    Tienda
                                 </li>
                             </Link>
 
-                            <MegaMenuModal data={megaMenuData} isOpen={openMegaMenu} onClose={() => setOpenMegaMenu(false)} />
-
-                            <Link href="/admin" className="block py-2 mx-auto px-3 text-gray-950 md:p-0">
+                            {/* <Link href="/admin" className="block py-2 mx-auto px-3 text-gray-950 md:p-0">
                                 <li onMouseOver={() => setOpenMegaMenu(false)} className="hover:border-b-2 px-1.5 ">
                                     Dashboard
                                 </li>
-                            </Link>
+                            </Link> */}
 
                             {/* <Link href="/admin#admin" className="block mx-auto py-2 px-3 text-gray-950 md:p-0">
                                 <li onMouseOver={() => setOpenMegaMenu(false)} className="hover:border-b-2 px-1.5">

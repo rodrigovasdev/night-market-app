@@ -2,17 +2,21 @@
 
 import React from 'react'
 import { useState } from 'react'
-//import Image from "next/image";
-import { Star } from "lucide-react";
+import ReviewCarousel from '@/app/components/ui/ReviewCarousel';
 
-function InfoDetail({ specifications }: { specifications: string }) {
+interface InfoDetailProps {
+    specifications: string;
+    productId: number;
+}
+
+function InfoDetail({ specifications, productId }: InfoDetailProps) {
 
     const [isOptionSelected, setIsOptionSelected] = useState(0)
 
-    const options = ["Description","Additional information","Reviews"]
+    const options = ["Descripción", "Reseñas"]
 
   return (
-    <div className = "w-full justify-around pt-10">
+    <div className = "w-full h-100 justify-around pt-10">
         <div className = "flex">
         {options.map((option,index) => 
         <span key={index} className = {`cursor-pointer flex-1 text-center border-b-4 p-4 ${isOptionSelected === index ? "font-bold border-black" : "text-gray-400 border-transparent"}`} onClick = {()=>setIsOptionSelected(index)}>
@@ -20,27 +24,15 @@ function InfoDetail({ specifications }: { specifications: string }) {
         </span>
         )}
         </div>
-        <div className = "h-40">
-            {isOptionSelected === 0 && <p className = "text-md pt-5 overflow-hidden max-h-40">{specifications}</p>}
-            {isOptionSelected === 1 && <p className = "text-md pt-5 overflow-hidden max-h-40">Esto es informacion adicional de prueba</p>}
-            {isOptionSelected === 2 && 
-                <div className = "flex flex-col pt-10 overflow-hidden max-h-40">
-                    <div className = "flex flex-row">
-                        <div className = "flex flex-col text-center">
-                            {/* <Image className="rounded-full h-25 w-25" src="/assets/gorda.jpg"alt="Producto" width = {300} height = {300}/> */}
-                            <span className = "font-semibold">Josefa</span>
-                        </div>
-                        <div className = "flex flex-col pl-5">
-                            <div className="flex text-yellow-400">
-                                {[...Array(5)].map((_, index) => (
-                                    <Star key={index} fill="currentColor" stroke="none" className="w-6 h-6"/>
-                                ))}
-                            </div>
-                            <span className = "font-bold text-sm pt-3">Muy buenas poleras</span>
-                        </div>
-                    </div>
+        <div className = "">
+            {isOptionSelected === 0 && (
+                <div className="text-md pt-5 flex flex-col gap-1">
+                    {specifications.split('.').filter(s => s.trim()).map((line, i) => (
+                        <span key={i}>{line.trim()}.</span>
+                    ))}
                 </div>
-            }
+            )}
+                                                {isOptionSelected === 1 && <ReviewCarousel productId={productId} />}
         </div>
     </div>
   )

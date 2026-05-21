@@ -34,8 +34,8 @@ export default function Start() {
               className="duration-700 ease-linear"
               ></Image>
               <div className="flex justify-around px-5 w-4/5 md:w-1/5 gap-6 z-10 absolute top-4/5 md:top-2/3 start-1/2 translate-x-[-50%] translate-y-[-50%]">
-                  <Button content="Buy now" width="w-2/5" paddingY="py-3" heigth="h-full" variant="primary"></Button>
-                  <Button type="link" href="#featured" content="Show more" width="w-3/5 2xl:w-2/5 text-center " paddingY="py-3"  heigth="h-full" variant="secondary"></Button>
+                  <Button type="link" href="/products" content="Comprar ahora" width="w-2/5 text-center" paddingY="py-3" heigth="h-full" variant="primary"></Button>
+                  <Button type="link" href="#featured" content="Mostrar más" width="w-3/5 2xl:w-2/5 text-center " paddingY="py-3"  heigth="h-full" variant="secondary"></Button>
               </div>
             </div>
             
