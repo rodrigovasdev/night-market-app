@@ -42,7 +42,7 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
     <div className='flex w-full gap-3'>
       {inCart
         ? <Button variant='secondary' width='w-1/2 md:w-1/4' content='Quitar del carrito' onClick={() => setShowConfirm(true)} />
-        : <Button variant='primary' width='w-1/2 md:w-1/4' content='Add to Cart' onClick={() => { addItem({ ...product, quantity }); toast.success(`"${title}" agregado al carrito`); }} />
+        : <Button variant='primary' width='w-1/2 md:w-1/4' content='Añadir al carrito' onClick={() => { addItem({ ...product, quantity }); toast.success(`"${title}" agregado al carrito`); }} />
       }
       {!inCart && (
         <input
