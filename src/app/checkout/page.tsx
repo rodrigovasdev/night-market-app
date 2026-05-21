@@ -1,4 +1,3 @@
-
 "use client";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
@@ -49,6 +48,7 @@ export default function Checkout() {
     const hasItems = itemCount > 0;
     const title = hasItems ? 'TU CARRITO' : 'NO TIENES PRODUCTOS EN EL CARRITO';
     const text = itemCount === 1 ? 'producto' : 'productos';
+    const userMail = useUserStore((state) => state.mail); // Obtener correo del usuario
 
     async function handlePrimaryCheckoutAction() {
         if (!isLoggedIn) {
@@ -115,7 +115,8 @@ export default function Checkout() {
                     ) : (
                         <div className="px-4 pb-2 max-w-md">
                             <p className="text-base text-gray-700 mb-6">
-                                La compra ha sido exitosa y se ha enviado un correo con el detalle.
+                                La compra ha sido exitosa
+                                {userMail && ` y se ha enviado un correo con el detalle.`}
                             </p>
                             <Button
                                 content="Aceptar"
