@@ -8,6 +8,7 @@ import FormField from '@/app/components/ui/FormField'
 import { useUserStore } from '@/store/user.store'
 import { createProductReview } from '@/services/products.service'
 import { toast } from 'sonner'
+import { NAME_FIELD, EMAIL_FIELD } from '@/utils/formFields.constants'
 import ReviewCard from '@/app/components/ui/ReviewCard'
 import Loading from '@/app/components/ui/Loading'
 
@@ -89,23 +90,19 @@ export default function ReviewForm({ productId }: ReviewFormProps) {
       ) : (
         <form onSubmit={handleSubmit} className="space-y-4">
           <FormField
-            label="Nombre"
+            {...NAME_FIELD}
             id="name"
-            name="name"
             value={formData.name}
             onChange={handleChange}
-            placeholder="Max Gonzalez"
             disabled={isSubmitting}
             required
           />
           <FormField
+            {...EMAIL_FIELD}
             label="Correo Electrónico"
             id="email"
-            name="email"
-            type="email"
             value={formData.email}
             onChange={handleChange}
-            placeholder="max@correo.cl"
             disabled={isSubmitting}
             required
           />

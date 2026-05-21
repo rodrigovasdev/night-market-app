@@ -7,6 +7,7 @@ import FormField from "@/app/components/ui/FormField";
 import Loading from "@/app/components/ui/Loading";
 import { sendDemoVersionMail } from "@/services/mail.service";
 import { useUserStore } from "@/store/user.store";
+import { NAME_FIELD, EMAIL_FIELD } from "@/utils/formFields.constants";
 
 interface DemoVersionFormProps {
     onSuccess?: () => void;
@@ -65,24 +66,19 @@ export default function DemoVersionForm({ onSuccess }: DemoVersionFormProps) {
                 ) : (
                     <>
                         <FormField
-                            label="Nombre"
+                            {...NAME_FIELD}
                             id="demo-name"
-                            name="name"
                             required
                             disabled={isSubmitting}
-                            placeholder="Max Gonzalez"
                             className="w-full"
                             value={name}
                             onChange={(e) => setName(e.target.value)}
                         />
                         <FormField
-                            label="Correo"
+                            {...EMAIL_FIELD}
                             id="demo-email"
-                            name="email"
-                            type="email"
                             required
                             disabled={isSubmitting}
-                            placeholder="max@correo.cl"
                             className="w-full mb-3"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}

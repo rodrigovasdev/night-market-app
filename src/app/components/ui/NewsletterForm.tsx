@@ -5,6 +5,7 @@ import FormField from "@/app/components/ui/FormField";
 import Loading from "@/app/components/ui/Loading";
 import { sendDiscountMail } from "@/services/mail.service";
 import { useUserStore } from "@/store/user.store";
+import { NAME_FIELD, EMAIL_FIELD } from "@/utils/formFields.constants";
 
 interface NewsletterFormProps {
     onSubmit?: (data: { name?: string; email: string }) => void;
@@ -53,23 +54,18 @@ export default function NewsletterForm({ onSubmit, layout = "default" }: Newslet
             <div className="flex flex-col gap-1 py-5 items-center">
                 {!isLoggedIn && (
                     <FormField
-                        label="Nombre"
+                        {...NAME_FIELD}
                         id="name"
-                        name="name"
                         required
                         disabled={isSubmitting}
-                        placeholder="Max Gonzalez"
                         className={fieldWidthClass}
                     />
                 )}
                 <FormField
-                    label="Correo"
+                    {...EMAIL_FIELD}
                     id="email"
-                    name="email"
-                    type="email"
                     required
                     disabled={isSubmitting}
-                    placeholder="max@correo.cl"
                     className={`${fieldWidthClass} mb-4`}
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}

@@ -5,6 +5,7 @@ import FormField from "@/app/components/ui/FormField";
 import { createUser } from "@/services/user.service";
 import { useUserStore } from "@/store/user.store";
 import { toast } from "sonner";
+import { NAME_FIELD, EMAIL_FIELD } from "@/utils/formFields.constants";
 
 interface LoginFormProps {
     onSuccess: () => void;
@@ -35,20 +36,16 @@ export default function LoginForm({ onSuccess }: LoginFormProps) {
         <form onSubmit={handleSubmit} className="flex flex-col h-full max-h-xl mx-auto text-center md:px-20">
             <div className="relative mb-4 flex flex-col gap-3">
                 <FormField
-                    label="Nombre"
+                    {...NAME_FIELD}
                     id="name"
-                    name="name"
-                    placeholder="Max Gonzalez"
                     required
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                 />
                 <FormField
+                    {...EMAIL_FIELD}
                     label="Correo (opcional)"
                     id="email"
-                    name="email"
-                    type="email"
-                    placeholder="max@correo.cl"
                     value={mail}
                     onChange={(e) => setMail(e.target.value)}
                 />
