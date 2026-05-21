@@ -4,6 +4,7 @@ import { Open_Sans } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/app/components/layout/Navbar";
 import Footer from "@/app/components/layout/Footer";
+import { Toaster } from "sonner";
 
 const openSans = Open_Sans({
   variable: "--font-open-sans",
@@ -31,6 +32,7 @@ export default function RootLayout({
         className={`${openSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen`}
       >
         <Navbar />
+        <Toaster richColors position="bottom-center" />
         <main className="">
           {children}
         </main>
