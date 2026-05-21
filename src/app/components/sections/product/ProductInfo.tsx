@@ -6,6 +6,7 @@ import { useCartStore } from '@/store/cart.store';
 import { Product } from '@/types/product.types';
 import { toast } from 'sonner';
 import ConfirmDeletePopUp from '@/app/components/ui/ConfirmDeletePopUp';
+import { formatPriceCLP } from '@/utils/formatPrice';
 
 interface ProductInfoProps {
   product: Product;
@@ -38,7 +39,7 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
     <span className="text-2xl font-bold">{title}</span>
     <span className="text-md pt-5">{shortDescription}</span>
     <span className="text-md pt-5">{longDescription}</span>
-    <span className="text-2xl font-bold pt-5 pb-5">${price}</span>
+    <span className="text-2xl font-bold pt-5 pb-5">{formatPriceCLP(price)}</span>
     <div className='flex w-full gap-3'>
       {inCart
         ? <Button variant='secondary' width='w-1/2 md:w-1/4' content='Quitar del carrito' onClick={() => setShowConfirm(true)} />

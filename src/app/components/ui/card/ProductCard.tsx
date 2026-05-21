@@ -31,7 +31,7 @@ function ProductCard({ title, shortDescription, price, imageUrl, id }: ProductCa
           </div>
           <div className="flex flex-col gap-1">
             <span className="text-slate-900 font-bold text-lg">{formatPriceCLP(price)}</span>
-            <span className="text-gray-500 text-sm">Free shipping</span>
+            <span className="text-gray-500 text-sm">Envío gratis</span>
           </div>
         </div>
       </div>
