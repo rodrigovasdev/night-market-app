@@ -44,7 +44,7 @@ export default function DropdownSelector<T extends DropdownItem>({
         <div ref={ref} className="relative">
             <button
                 onClick={() => setOpen(!open)}
-                className={`flex items-center gap-2 font-bold ${textSize} hover:opacity-70 transition-opacity`}
+                className={`flex items-center gap-2 font-bold ${textSize} hover:opacity-70 transition-opacity cursor-pointer`}
             >
                 {selected?.name ?? allOptionLabel ?? placeholder}
                 <ChevronDownIcon className={`w-5 h-5 transition-transform ${open ? "rotate-180" : ""}`} />
@@ -54,7 +54,7 @@ export default function DropdownSelector<T extends DropdownItem>({
                     {allOptionLabel && selected !== null && (
                         <li>
                             <button
-                                className={`w-full text-left px-5 py-3 font-semibold hover:bg-gray-100 transition-colors`}
+                                className={`w-full cursor-pointer text-left px-5 py-3 font-semibold hover:bg-gray-100 transition-colors`}
                                 onClick={() => { onClear?.(); setOpen(false); }}
                             >
                                 {allOptionLabel}
@@ -66,7 +66,7 @@ export default function DropdownSelector<T extends DropdownItem>({
                         .map((item) => (
                             <li key={item.id}>
                                 <button
-                                    className={`w-full text-left px-5 py-3 font-semibold hover:bg-gray-100 transition-colors `}
+                                    className={`w-full cursor-pointer text-left px-5 py-3 font-semibold hover:bg-gray-100 transition-colors `}
                                     onClick={() => { onSelect(item); setOpen(false); }}
                                 >
                                     {item.name}
