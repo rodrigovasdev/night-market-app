@@ -29,7 +29,7 @@ export default function FeaturedProducts() {
                         key={product.id}
                         title={product.name}
                         shortDescription={product.shortDescription}
-                        price={`$${product.price}`}
+                        price={product.price}
                         imageUrl={product.images[0]?.url || '/assets/ecommerce.jpg'}
                         id={product.id}
                         />

@@ -7,6 +7,7 @@ import Link from "next/link";
 import { toast } from "sonner";
 import { useState } from "react";
 import ConfirmDeletePopUp from "@/app/components/ui/ConfirmDeletePopUp";
+import { formatPriceCLP } from "@/utils/formatPrice";
 
 interface CheckoutCardProps {
     product: CartItem;
@@ -62,7 +63,7 @@ export default function CheckoutCard({ product, subtotal }: CheckoutCardProps) {
                             </div>
 
                             <span className="order-3 md:order-2 font-semibold my-auto mx-auto">
-                                ${subtotal !== undefined ? subtotal.toFixed(2) : product.price}
+                                {formatPriceCLP(subtotal !== undefined ? subtotal : product.price)}
                             </span>
 
                             <div className="order-1 md:order-3 my-auto flex justify-end">

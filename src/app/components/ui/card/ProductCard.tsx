@@ -1,11 +1,12 @@
 import React from 'react'
 import Image from "next/image";
 import Link from 'next/link';
+import { formatPriceCLP } from "@/utils/formatPrice";
 
 interface ProductCardProps {
   title: string;
   shortDescription: string;
-  price: string;
+  price: number;
   imageUrl: string;
   id: number;
 }
@@ -29,7 +30,7 @@ function ProductCard({ title, shortDescription, price, imageUrl, id }: ProductCa
             <span className="text-gray-500 text-sm line-clamp-2">{shortDescription}</span>
           </div>
           <div className="flex flex-col gap-1">
-            <span className="text-slate-900 font-bold text-lg">{price}</span>
+            <span className="text-slate-900 font-bold text-lg">{formatPriceCLP(price)}</span>
             <span className="text-gray-500 text-sm">Free shipping</span>
           </div>
         </div>

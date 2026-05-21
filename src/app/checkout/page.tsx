@@ -11,6 +11,7 @@ import Loading from "../components/ui/Loading";
 import { useCartStore } from "@/store/cart.store";
 import { syncCart, checkoutCart, CartCalculation } from "@/services/cart.service";
 import { useUserStore } from "@/store/user.store";
+import { formatPriceCLP } from "@/utils/formatPrice";
 
 export default function Checkout() {
     const router = useRouter();
@@ -62,6 +63,31 @@ export default function Checkout() {
 
         const payload = {
             userId,
+            discount: appliedDiscountCode,
+            items: items.map((item) => ({
+                productId: item.id,
+                quantity: item.quantity,
+            })),
+        };
+
+        setIsLoading(true);
+        setCheckoutError(null);
+        setShowPurchaseSuccessPopup(true);
+
+        const isCheckoutOk = await checkoutCart(payload);
+        if (isCheckoutOk) {
+            clearCart();
+            setCheckoutError(null);
+        } else {
+            setCheckoutError("Algo ocurrió durante la compra. Por favor, intenta nuevamente.");
+        }
+        setIsLoading(false);
+    }
+
+    async function handleGuestCheckout() {
+        const payload = {
+            userId: -1,
+            guestName: "Invitado",
             discount: appliedDiscountCode,
             items: items.map((item) => ({
                 productId: item.id,
@@ -150,61 +176,72 @@ export default function Checkout() {
                 </div>
             </div>
             
-            <div className="basis-1/3">
-                <div className="flex w-full mx-auto flex-col rounded-xl border-1 border-gray-300">
-                    <div className="flex px-10 py-10 items-center justify-between">
-                        <h1 className="font-bold text-2xl">RESUMEN DE COMPRA</h1>
-                        <ShoppingBagIcon className={`w-8 h-8 text-neutral-950`} />
-                    </div>
-                    <div className="flex flex-col px-10 pb-5">
-                        <div className="flex justify-between">
-                            <span className="">{itemCount} {itemCount === 1 ? 'producto' : 'productos'}</span> 
-                            <span className="">${calculation?.totalValue.toFixed(2) ?? '—'}</span>
+            {
+                hasItems && (
+                    <div className="basis-1/3">
+                        <div className="flex w-full mx-auto flex-col rounded-xl border-1 border-gray-300">
+                            <div className="flex px-10 py-10 items-center justify-between">
+                                <h1 className="font-bold text-2xl">RESUMEN DE COMPRA</h1>
+                                <ShoppingBagIcon className={`w-8 h-8 text-neutral-950`} />
+                            </div>
+                            <div className="flex flex-col px-10 pb-5">
+                                <div className="flex justify-between">
+                                    <span className="">{itemCount} {itemCount === 1 ? 'producto' : 'productos'}</span> 
+                                    <span className="">{calculation ? formatPriceCLP(calculation.totalValue) : '—'}</span>
+                                </div>
+                                <div className="flex justify-between">
+                                    <span className="">Envío</span> 
+                                    <span className="">Gratis</span>
+                                </div>
+                            </div>
+                            <div className="flex justify-between px-10">
+                                <span className="font-semibold">Total</span> 
+                                <span className="font-semibold">{calculation ? formatPriceCLP(calculation.totalValue) : '—'}</span>
+                            </div>
+                            <div className="px-10 pt-6 flex flex-col gap-3">
+                                <FormField
+                                    label="Codigo de descuento"
+                                    id="discountCode"
+                                    name="discountCode"
+                                    placeholder="SUMMER10"
+                                    disabled={isDiscountApplied}
+                                    value={discountCode}
+                                    onChange={(e) => setDiscountCode(e.target.value)}
+                                />
+                                <Button
+                                    content={
+                                        isDiscountApplied
+                                            ? (showThanksMessage ? "Gracias por su preferencia" : "Descuento aplicado")
+                                            : "Aplicar descuento"
+                                    }
+                                    width="w-full"
+                                    variant={isDiscountApplied ? "success" : "secondary"}
+                                    onClick={handleApplyDiscount}
+                                />
+                            </div>
+                            <div className="px-10 flex flex-col gap-3 py-10">
+                                <Button
+                                    content={isLoggedIn ? "Comprar" : "Registrarse"}
+                                    width="w-full"
+                                    variant="primary"
+                                    onClick={handlePrimaryCheckoutAction}
+                                />
+                                {
+                                !isLoggedIn && (
+                                    <Button
+                                        content="Comprar como invitado"
+                                        width="w-full"
+                                        variant="secondary"
+                                        onClick={handleGuestCheckout}
+                                    />
+                                )
+                                }
+                            </div>
+                            
                         </div>
-                        <div className="flex justify-between">
-                            <span className="">Envío</span> 
-                            <span className="">Gratis</span>
-                        </div>
                     </div>
-                    <div className="flex justify-between px-10">
-                        <span className="font-semibold">Total</span> 
-                        <span className="font-semibold">${calculation?.totalValue.toFixed(2) ?? '—'}</span>
-                    </div>
-                    <div className="px-10 pt-6 flex flex-col gap-3">
-                        <FormField
-                            label="Codigo de descuento"
-                            id="discountCode"
-                            name="discountCode"
-                            placeholder="SUMMER10"
-                            disabled={isDiscountApplied}
-                            value={discountCode}
-                            onChange={(e) => setDiscountCode(e.target.value)}
-                        />
-                        <Button
-                            content={
-                                isDiscountApplied
-                                    ? (showThanksMessage ? "Gracias por su preferencia" : "Descuento aplicado")
-                                    : "Aplicar descuento"
-                            }
-                            width="w-full"
-                            variant={isDiscountApplied ? "success" : "secondary"}
-                            onClick={handleApplyDiscount}
-                        />
-                    </div>
-                    <div className="px-10 flex flex-col gap-3 py-10">
-                        <Button
-                            content={isLoggedIn ? "Comprar" : "Registrarse"}
-                            width="w-full"
-                            variant="primary"
-                            onClick={handlePrimaryCheckoutAction}
-                        />
-                        {
-                        !isLoggedIn && <Button content="Comprar como invitado" width="w-full"  variant="secondary"/>
-                        }
-                    </div>
-                    
-                </div>
-            </div>
+                )
+            }
                 
         </div>
     );

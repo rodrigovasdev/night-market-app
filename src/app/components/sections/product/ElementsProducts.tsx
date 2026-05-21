@@ -125,7 +125,7 @@ const listItems5 = ['10% off', '20% off', '30% off', '40% off'];
                   key={product.id}
                   title={product.name}
                   shortDescription={product.shortDescription}
-                  price={`$${product.price}`}
+                  price={product.price}
                   imageUrl={product.images[0]?.url || '/assets/ecommerce.jpg'}
                   id={product.id}
                 />
