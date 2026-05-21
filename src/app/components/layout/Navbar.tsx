@@ -2,7 +2,8 @@
 
 import Button from "@/app/components/ui/Button"
 import SearchSection from "@/app/components/sections/search/SearchSection";
-import { UserIcon, ShoppingCartIcon } from "@heroicons/react/24/outline"
+import OffCanva from "@/app/components/ui/OffCanva";
+import { Bars3Icon, ShoppingCartIcon, UserIcon } from "@heroicons/react/24/outline"
 import Link from "next/link"
 import { useState } from "react"
 import PopUpLogin from "../sections/userLoginRegister/PopUpLogin"
@@ -14,10 +15,25 @@ export default function Navbar () {
 
     const [menuOpen, setMenuOpen] = useState(false)
     const [searchSectionOpen, setSearchSectionOpen] = useState(false)
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
     const toggleMenu = () =>{
         setMenuOpen(!menuOpen)
     }
+
+    const openLoginFromMobileMenu = () => {
+        setMobileMenuOpen(false)
+        setMenuOpen(true)
+    }
+
+    const closeMobileMenu = () => {
+        setMobileMenuOpen(false)
+    }
+
+    const navLinks = [
+        { href: '/', label: 'Inicio' },
+        { href: '/products', label: 'Tienda' },
+    ]
 
     const name = useUserStore((state) => state.name) || 'Invitado';
     const itemCount = useCartStore((state) => state.itemCount);
@@ -29,6 +45,51 @@ export default function Navbar () {
                 {menuOpen && 
                     <PopUpLogin onClick={toggleMenu}></PopUpLogin>
                 }
+
+                {mobileMenuOpen && (
+                    <OffCanva onClick={() => setMobileMenuOpen(false)} isOpen={mobileMenuOpen} title="Navegación">
+                        <ul className="flex flex-col gap-3 p-4 font-medium">
+                            <li>
+                                <button
+                                    type="button"
+                                    onClick={openLoginFromMobileMenu}
+                                    className="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-left text-lg font-medium text-neutral-950 transition-colors hover:bg-neutral-100"
+                                >
+                                    <UserIcon className="h-5 w-5 text-neutral-950" />
+                                    <span>Login</span>
+                                </button>
+                            </li>
+
+                            <li>
+                                <Link
+                                    href="/checkout"
+                                    onClick={closeMobileMenu}
+                                    className="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-lg font-medium text-neutral-950 transition-colors hover:bg-neutral-100"
+                                >
+                                    <ShoppingCartIcon className="h-5 w-5 text-neutral-950" />
+                                    <span className="relative">
+                                        Carrito
+                                        <span className="absolute -top-3 -right-5 flex h-4 w-4 items-center justify-center rounded-full bg-neutral-950 text-[10px] font-bold text-white pointer-events-none">
+                                            {itemCount}
+                                        </span>
+                                    </span>
+                                </Link>
+                            </li>
+
+                            {navLinks.map((link) => (
+                                <li key={link.href}>
+                                    <Link
+                                        href={link.href}
+                                        onClick={closeMobileMenu}
+                                        className="block rounded-xl px-4 py-3 text-lg font-medium text-neutral-950 transition-colors hover:bg-neutral-100"
+                                    >
+                                        {link.label}
+                                    </Link>
+                                </li>
+                            ))}
+                        </ul>
+                    </OffCanva>
+                )}
 
                 {
                     <SearchSection onClick={() => setSearchSectionOpen(false)} isOpen={searchSectionOpen}/>
@@ -72,28 +133,35 @@ export default function Navbar () {
                             <input type="text" id="search-navbar" className="block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-full bg-gray-100 focus:ring-blue-100 focus:border-blue-100" placeholder="Search..."/>                    
                         </div> */}
                         
-                        <button data-collapse-toggle="navbar-sticky" type="button" className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200" aria-controls="navbar-sticky" aria-expanded="false">
-                            <span className="sr-only">Open main menu</span>
-                            <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
-                                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 1h15M1 7h15M1 13h15"/>
-                            </svg>
-                        </button>
+                        <Button
+                            type="icon"
+                            width="w-10"
+                            heigth="h-10"
+                            paddingX="px-0"
+                            paddingY="py-0"
+                            border="border-none"
+                            aux="md:hidden"
+                            onClick={() => setMobileMenuOpen(true)}
+                        >
+                            <Bars3Icon className="w-6 h-6 text-neutral-950" />
+                        </Button>
                         
                     </div>
                     
                     <div className="hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
                         <ul className="flex flex-col gap-8 items-center p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white">
-                            <Link href="/" className="block py-2 px-3 mx-auto text-gray-950 md:p-0">
-                                <li onMouseOver={() => setOpenMegaMenu(false)} className="hover:border-b-2 px-1.5">
-                                    Inicio
-                                </li>
-                            </Link>
-
-                            <Link onMouseOver={() => setOpenMegaMenu(true)} href="/products" className={`block mx-auto py-2 px-3 text-gray-950 md:p-0 ${openMegaMenu ? 'text-gray-950' : ''}`}>
-                                <li className={`hover:border-b-2 px-1.5 ${openMegaMenu ? 'border-b-2' : ''}`}>
-                                    Tienda
-                                </li>
-                            </Link>
+                            {navLinks.map((link) => (
+                                <Link
+                                    key={link.href}
+                                    href={link.href}
+                                    onMouseOver={() => link.href === '/products' ? setOpenMegaMenu(true) : setOpenMegaMenu(false)}
+                                    className={`block mx-auto py-2 px-3 text-gray-950 md:p-0 ${openMegaMenu && link.href === '/products' ? 'text-gray-950' : ''}`}
+                                >
+                                    <li className={`hover:border-b-2 px-1.5 ${openMegaMenu && link.href === '/products' ? 'border-b-2' : ''}`}>
+                                        {link.label}
+                                    </li>
+                                </Link>
+                            ))}
 
                             {/* <Link href="/admin" className="block py-2 mx-auto px-3 text-gray-950 md:p-0">
                                 <li onMouseOver={() => setOpenMegaMenu(false)} className="hover:border-b-2 px-1.5 ">
