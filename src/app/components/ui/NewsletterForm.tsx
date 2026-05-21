@@ -8,15 +8,21 @@ import { useUserStore } from "@/store/user.store";
 
 interface NewsletterFormProps {
     onSubmit?: (data: { name?: string; email: string }) => void;
+    layout?: "default" | "popup";
 }
 
-export default function NewsletterForm({ onSubmit }: NewsletterFormProps) {
+export default function NewsletterForm({ onSubmit, layout = "default" }: NewsletterFormProps) {
     const storedName = useUserStore((state) => state.name);
     const setDiscountSent = useUserStore((state) => state.setDiscountSent);
     const isLoggedIn = storedName !== null;
     const storedMail = useUserStore((state) => state.mail);
     const [email, setEmail] = useState(storedMail ?? "");
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const isPopupLayout = layout === "popup";
+
+    const formWidthClass = isPopupLayout ? "w-full md:w-11/12" : "w-4/5 md:w-3/5";
+    const fieldWidthClass = isPopupLayout ? "w-full" : "w-1/2";
+    const buttonWidth = isPopupLayout ? "w-full" : "w-1/2";
 
     useEffect(() => {
         if (storedMail) {
@@ -43,7 +49,7 @@ export default function NewsletterForm({ onSubmit }: NewsletterFormProps) {
     }
 
     return (
-        <form onSubmit={handleSubmit} className="w-4/5 md:w-3/5 mx-auto">
+        <form onSubmit={handleSubmit} className={`${formWidthClass} mx-auto`}>
             <div className="flex flex-col gap-1 py-5 items-center">
                 {!isLoggedIn && (
                     <FormField
@@ -53,7 +59,7 @@ export default function NewsletterForm({ onSubmit }: NewsletterFormProps) {
                         required
                         disabled={isSubmitting}
                         placeholder="Max Gonzalez"
-                        className="w-1/2"
+                        className={fieldWidthClass}
                     />
                 )}
                 <FormField
@@ -64,13 +70,13 @@ export default function NewsletterForm({ onSubmit }: NewsletterFormProps) {
                     required
                     disabled={isSubmitting}
                     placeholder="max@correo.cl"
-                    className="w-1/2 mb-4"
+                    className={`${fieldWidthClass} mb-4`}
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                 />
                 <Button
                     content={isSubmitting ? "Enviando..." : "Enviar"}
-                    width="w-1/2"
+                    width={buttonWidth}
                     paddingY="py-3"
                     heigth="h-full"
                     variant="primary"

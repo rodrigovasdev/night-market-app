@@ -38,7 +38,7 @@ Para consultas, soporte o desarrollo de proyectos similares, puedes contactar al
                             ) : (
                                 <>
                                     <p className="text-center text-gray-600 pt-2">Completa el formulario y te enviamos la oferta a tu correo.</p>
-                                    <NewsletterForm />
+                                    <NewsletterForm layout="popup" />
                                 </>
                             )}
                         </div>
