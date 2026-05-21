@@ -19,7 +19,7 @@ export default function Start() {
               height={1000}
               className="duration-700 ease-linear"
               ></Image>
-              <div className="flex justify-around px-5 w-4/5 md:w-1/5 gap-6 z-10 absolute bottom-40 right-40">
+              <div className="flex justify-around px-5 w-4/5 md:w-1/5 gap-6 z-10 absolute bottom-1 right-10 md:bottom-40 md:right-40">
                   <Button type="link" href="/products" content="Comprar ahora" width="w-2/5 text-center" paddingY="py-3" heigth="h-full" variant="primary"></Button>
                   <Button type="link" href="#featured" content="Mostrar más" width="w-3/5 2xl:w-2/5 text-center " paddingY="py-3"  heigth="h-full" variant="secondary"></Button>
               </div>
