@@ -36,6 +36,30 @@ export async function getLatestProducts(): Promise<Product[]> {
   return response.json();
 }
 
+interface TopSellingProductResponse extends Omit<Product, 'price'> {
+  price: number | string;
+  soldQuantity: number;
+}
+
+export interface TopSellingProduct extends Product {
+  soldQuantity: number;
+}
+
+export async function getTopSellingProducts(): Promise<TopSellingProduct[]> {
+  const response = await fetch(`${API_URL}/products/top-selling`);
+
+  if (!response.ok) {
+    throw new Error(`Failed to fetch top selling products: ${response.status}`);
+  }
+
+  const data: TopSellingProductResponse[] = await response.json();
+
+  return data.map((product) => ({
+    ...product,
+    price: typeof product.price === 'string' ? Number(product.price) : product.price,
+  }));
+}
+
 
 export async function getProduct(id: number): Promise<Product> {
   const response = await fetch(`${API_URL}/products/${id}`);
