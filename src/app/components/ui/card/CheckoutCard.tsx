@@ -1,7 +1,7 @@
 import CardContainer from "@/app/components/ui/CardContainer";
 import Button from "@/app/components/ui/Button";
 import Image from "next/image";
-import { XMarkIcon , HeartIcon} from "@heroicons/react/24/solid";
+import { XMarkIcon } from "@heroicons/react/24/solid";
 import { useCartStore, CartItem } from "@/store/cart.store";
 import Link from "next/link";
 import { toast } from "sonner";
@@ -71,9 +71,9 @@ export default function CheckoutCard({ product, subtotal }: CheckoutCardProps) {
                                     <Button type="icon" width="w-10" paddingX="px-2.5" border="border-none" onClick={() => setShowConfirm(true)}>
                                         <XMarkIcon className={`w-5 h-5 text-neutral-950`} />
                                     </Button>
-                                    <Button type="icon" width="w-10" paddingX="px-2.5" border="border-none">
+                                    {/* <Button type="icon" width="w-10" paddingX="px-2.5" border="border-none">
                                         <HeartIcon className={`w-5 h-5 text-neutral-950`} />
-                                    </Button>
+                                    </Button> */}
                                 </div>
                             </div>
 
