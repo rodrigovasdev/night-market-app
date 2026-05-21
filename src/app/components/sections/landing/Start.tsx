@@ -1,22 +1,10 @@
 'use client';
-import { useState } from "react";
 import Image from "next/image";
 import Button from "@/app/components/ui/Button"
 
 export default function Start() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const images = [
-    "https://res.cloudinary.com/di7lw3pla/image/upload/q_auto/f_auto/v1779331926/banner2_ibyhxi.png",
+  const image = "https://res.cloudinary.com/di7lw3pla/image/upload/q_auto/f_auto/v1779331926/banner2_ibyhxi.png";
 
-  ];
-  const handleNext = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-  }
-  const handlePrev = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? images.length - 1 : prevIndex - 1
-    );
-  };
   return (
     <>
       <div id="gallery" className="relative w-full h-full md:h-screen" data-carousel="slide">
@@ -25,7 +13,7 @@ export default function Start() {
           
             <div className="duration-200 ease-linear" data-carousel-item>
               <Image
-              src={images[currentIndex]}
+              src={image}
               alt="a"
               width={2000}
               height={1000}
