@@ -18,7 +18,7 @@ export default function Jumbotron() {
                 </h1>
                 {!discountSent && (
                     <>
-                        <p className="font-medium text-lg md:text-lg text-center w-4/5 md:w-3/5 mx-auto py-5" >¡Dinos tu correo para recibir las mejores ofertas!</p>
+                        <p className="font-medium text-lg md:text-lg text-center w-4/5 md:w-3/5 mx-auto py-5" >¡Dinos tu correo para recibir un descuento inolvidable!</p>
                         <NewsletterForm />
                     </>
                 )}
