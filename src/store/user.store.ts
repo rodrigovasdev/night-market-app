@@ -14,9 +14,11 @@ interface UserState {
   name: string | null;
   mail: string | null;
   discountSent: boolean;
+  demoContactSent: boolean;
   sentReviews: StoredProductReview[];
   setUser: (id: number, name: string, mail: string | null) => void;
   setDiscountSent: (sent: boolean) => void;
+  setDemoContactSent: (sent: boolean) => void;
   saveSentReview: (review: StoredProductReview) => void;
   clearUser: () => void;
 }
@@ -28,9 +30,11 @@ export const useUserStore = create<UserState>()(
         name: null,
         mail: null,
         discountSent: false,
+        demoContactSent: false,
         sentReviews: [],
         setUser: (id, name, mail) => set({ id, name, mail }),
         setDiscountSent: (sent) => set({ discountSent: sent }),
+        setDemoContactSent: (sent) => set({ demoContactSent: sent }),
         saveSentReview: (review) =>
             set((state) => ({
             sentReviews: [
@@ -38,7 +42,7 @@ export const useUserStore = create<UserState>()(
               review,
             ],
             })),
-        clearUser: () => set({ id: null, name: null, mail: null, discountSent: false, sentReviews: [] }),
+        clearUser: () => set({ id: null, name: null, mail: null, discountSent: false, demoContactSent: false, sentReviews: [] }),
     }),
     { name: 'user-storage' }
   )

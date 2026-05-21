@@ -11,8 +11,8 @@ import { useUserStore } from "@/store/user.store";
 export default function OfferCardsSection() {
     const [isPopupOpen, setIsPopupOpen] = useState(false);
     const [isDemoPopupOpen, setIsDemoPopupOpen] = useState(false);
-    const [demoFormSent, setDemoFormSent] = useState(false);
     const discountSent = useUserStore((state) => state.discountSent);
+    const demoContactSent = useUserStore((state) => state.demoContactSent);
 
     return (
         <Container>
@@ -25,10 +25,7 @@ export default function OfferCardsSection() {
                         bgColor="bg-coral cursor-pointer"
                     />
                     <OfferCard
-                        onClick={() => {
-                            setDemoFormSent(false);
-                            setIsDemoPopupOpen(true);
-                        }}
+                        onClick={() => setIsDemoPopupOpen(true)}
                         title="🌟 Versión demo"
                         description="Demo funcional para portafolio. Haz clic para solicitar más información."
                         bgColor="bg-golden cursor-pointer"
@@ -59,18 +56,18 @@ export default function OfferCardsSection() {
                     <PopUpContainer onClose={() => setIsDemoPopupOpen(false)}>
                         <div className="w-full md:w-[36rem]">
                             <h2 className="text-center text-2xl font-bold">
-                                {demoFormSent ? "Solicitud enviada" : "Solicitar versión demo"}
+                                {demoContactSent ? "Solicitud enviada" : "Solicitar versión demo"}
                             </h2>
-                            {demoFormSent ? (
+                            {demoContactSent ? (
                                 <p className="text-center text-gray-600 pt-3 pb-2">
-                                    Gracias por tu interés. Te contactaremos pronto.
+                                    Correo de contacto ya enviado
                                 </p>
                             ) : (
                                 <>
                                     <p className="text-center text-gray-600 pt-2">
                                         Completa el formulario y te contactamos para ayudarte con un proyecto similar.
                                     </p>
-                                    <DemoVersionForm onSuccess={() => setDemoFormSent(true)} />
+                                    <DemoVersionForm />
                                 </>
                             )}
                         </div>

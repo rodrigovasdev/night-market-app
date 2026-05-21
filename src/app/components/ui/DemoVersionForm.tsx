@@ -16,36 +16,40 @@ interface DemoVersionFormProps {
 export default function DemoVersionForm({ onSuccess }: DemoVersionFormProps) {
     const storedName = useUserStore((state) => state.name);
     const storedMail = useUserStore((state) => state.mail);
-    const isLoggedIn = storedName !== null;
+    const setDemoContactSent = useUserStore((state) => state.setDemoContactSent);
+
+    const hasName = !!storedName;
+    const hasMail = !!storedMail;
 
     const [name, setName] = useState(storedName ?? "");
     const [email, setEmail] = useState(storedMail ?? "");
     const [isSubmitting, setIsSubmitting] = useState(false);
 
     useEffect(() => {
-        if (storedName) {
-            setName(storedName);
-        }
-        if (storedMail) {
-            setEmail(storedMail);
-        }
+        if (storedName) setName(storedName);
+        if (storedMail) setEmail(storedMail);
     }, [storedName, storedMail]);
 
     async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
         if (isSubmitting) return;
 
-        const username = (isLoggedIn ? storedName : name)?.trim() ?? "";
-        const userEmail = (isLoggedIn ? storedMail : email)?.trim() ?? "";
+        const username = (storedName ?? name).trim();
+        const userEmail = (storedMail ?? email).trim();
 
         if (!username || !userEmail) {
-            toast.error("Completa nombre y correo para enviar el formulario.");
+            toast.error(
+                !username
+                    ? "Completa nombre y correo para enviar el formulario."
+                    : "Ingresa tu correo para continuar."
+            );
             return;
         }
 
         setIsSubmitting(true);
         try {
             await sendDemoVersionMail({ username, email: userEmail });
+            setDemoContactSent(true);
             toast.success("Solicitud enviada correctamente.");
             onSuccess?.();
         } catch {
@@ -58,11 +62,21 @@ export default function DemoVersionForm({ onSuccess }: DemoVersionFormProps) {
     return (
         <form onSubmit={handleSubmit} className="w-full md:w-11/12 mx-auto">
             <div className="flex flex-col gap-2 py-4 items-center">
-                {isLoggedIn ? (
-                    <div className="w-full rounded-xl bg-neutral-100 p-4 mb-2">
-                        <p className="text-base font-semibold">{storedName}</p>
-                        <p className="text-sm text-gray-500">{storedMail ?? "Sin correo registrado"}</p>
-                    </div>
+                {hasName && hasMail ? null : hasName ? (
+                    <>
+                        <div className="w-full rounded-xl bg-neutral-100 p-4">
+                            <p className="text-base font-semibold">{storedName}</p>
+                        </div>
+                        <FormField
+                            {...EMAIL_FIELD}
+                            id="demo-email"
+                            required
+                            disabled={isSubmitting}
+                            className="w-full mb-1"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
+                    </>
                 ) : (
                     <>
                         <FormField
@@ -79,7 +93,7 @@ export default function DemoVersionForm({ onSuccess }: DemoVersionFormProps) {
                             id="demo-email"
                             required
                             disabled={isSubmitting}
-                            className="w-full mb-3"
+                            className="w-full mb-1"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                         />

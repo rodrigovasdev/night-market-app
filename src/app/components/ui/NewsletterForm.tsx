@@ -14,9 +14,13 @@ interface NewsletterFormProps {
 
 export default function NewsletterForm({ onSubmit, layout = "default" }: NewsletterFormProps) {
     const storedName = useUserStore((state) => state.name);
-    const setDiscountSent = useUserStore((state) => state.setDiscountSent);
-    const isLoggedIn = storedName !== null;
     const storedMail = useUserStore((state) => state.mail);
+    const setDiscountSent = useUserStore((state) => state.setDiscountSent);
+
+    const hasName = !!storedName;
+    const hasMail = !!storedMail;
+
+    const [name, setName] = useState(storedName ?? "");
     const [email, setEmail] = useState(storedMail ?? "");
     const [isSubmitting, setIsSubmitting] = useState(false);
     const isPopupLayout = layout === "popup";
@@ -26,24 +30,22 @@ export default function NewsletterForm({ onSubmit, layout = "default" }: Newslet
     const buttonWidth = isPopupLayout ? "w-full" : "w-1/2";
 
     useEffect(() => {
-        if (storedMail) {
-            setEmail(storedMail);
-        }
-    }, [storedMail]);
+        if (storedName) setName(storedName);
+        if (storedMail) setEmail(storedMail);
+    }, [storedName, storedMail]);
 
     async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
         if (isSubmitting) return;
 
-        const form = e.currentTarget;
-        const nameInput = form.elements.namedItem("name") as HTMLInputElement | null;
-        const username = (nameInput?.value ?? storedName ?? "").trim();
+        const username = (storedName ?? name).trim();
+        const userEmail = (storedMail ?? email).trim();
 
         setIsSubmitting(true);
         try {
-            await sendDiscountMail({ username, email });
+            await sendDiscountMail({ username, email: userEmail });
             setDiscountSent(true);
-            onSubmit?.({ name: username, email });
+            onSubmit?.({ name: username, email: userEmail });
         } finally {
             setIsSubmitting(false);
         }
@@ -52,24 +54,43 @@ export default function NewsletterForm({ onSubmit, layout = "default" }: Newslet
     return (
         <form onSubmit={handleSubmit} className={`${formWidthClass} mx-auto`}>
             <div className="flex flex-col gap-1 py-5 items-center">
-                {!isLoggedIn && (
-                    <FormField
-                        {...NAME_FIELD}
-                        id="name"
-                        required
-                        disabled={isSubmitting}
-                        className={fieldWidthClass}
-                    />
+                {hasName && hasMail ? null : hasName ? (
+                    <>
+                        <div className={`${fieldWidthClass} rounded-xl bg-neutral-100 px-5 py-3`}>
+                            <p className="text-base font-semibold">{storedName}</p>
+                        </div>
+                        <FormField
+                            {...EMAIL_FIELD}
+                            id="email"
+                            required
+                            disabled={isSubmitting}
+                            className={`${fieldWidthClass} mb-4`}
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
+                    </>
+                ) : (
+                    <>
+                        <FormField
+                            {...NAME_FIELD}
+                            id="name"
+                            required
+                            disabled={isSubmitting}
+                            className={fieldWidthClass}
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                        />
+                        <FormField
+                            {...EMAIL_FIELD}
+                            id="email"
+                            required
+                            disabled={isSubmitting}
+                            className={`${fieldWidthClass} mb-4`}
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
+                    </>
                 )}
-                <FormField
-                    {...EMAIL_FIELD}
-                    id="email"
-                    required
-                    disabled={isSubmitting}
-                    className={`${fieldWidthClass} mb-4`}
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                />
                 <Button
                     content={isSubmitting ? "Enviando..." : "Enviar"}
                     width={buttonWidth}
