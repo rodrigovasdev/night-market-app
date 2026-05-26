@@ -13,7 +13,7 @@ const Details = async ({ params }: { params: Promise<{ id: string }> }) => {
     <div className="flex flex-col md:flex-row w-full py-10 px-5 md:px-20">
       <div className="flex flex-col items-center w-full md:w-1/2">
         <ProductImage images={imagesUrl} />
-        <div className="hidden md:block">
+        <div className="hidden md:block w-full">
           <ReviewForm productId={Number(id)} />
         </div>
       </div>
