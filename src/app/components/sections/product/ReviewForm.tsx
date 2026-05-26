@@ -74,8 +74,8 @@ export default function ReviewForm({ productId }: ReviewFormProps) {
   };
 
   return (
-    <div className="w-6/8 mx-auto p-6">
-      <h1 className="font-bold text-3xl md:text-4xl text-center w-4/5 md:w-3/5 mx-auto py-5">DEJA UNA RESEÑA</h1>
+    <div className="w-full md:w-6/8 mx-auto p-0 md:p-6">
+      <h1 className="font-bold text-3xl md:text-4xl text-center w-full md:w-3/5 mx-auto py-5">DEJA UNA RESEÑA</h1>
       {sentReview ? (
         <div className="pt-6">
           <p className="text-center font-semibold text-green-600">Reseña enviada</p>

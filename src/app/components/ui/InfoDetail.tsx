@@ -16,7 +16,7 @@ function InfoDetail({ specifications, productId }: InfoDetailProps) {
     const options = ["Descripción", "Reseñas"]
 
   return (
-    <div className = "w-full h-100 justify-around pt-10">
+    <div className = "w-full md:h-100 justify-around pt-10">
         <div className = "flex">
         {options.map((option,index) => 
         <span key={index} className = {`cursor-pointer flex-1 text-center border-b-4 p-4 ${isOptionSelected === index ? "font-bold border-black" : "text-gray-400 border-transparent"}`} onClick = {()=>setIsOptionSelected(index)}>

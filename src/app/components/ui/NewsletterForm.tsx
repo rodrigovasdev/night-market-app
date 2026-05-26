@@ -26,8 +26,8 @@ export default function NewsletterForm({ onSubmit, layout = "default" }: Newslet
     const isPopupLayout = layout === "popup";
 
     const formWidthClass = isPopupLayout ? "w-full md:w-11/12" : "w-4/5 md:w-3/5";
-    const fieldWidthClass = isPopupLayout ? "w-full" : "w-1/2";
-    const buttonWidth = isPopupLayout ? "w-full" : "w-1/2";
+    const fieldWidthClass = isPopupLayout ? "w-full" : "w-full md:w-1/2";
+    const buttonWidth = isPopupLayout ? "w-full" : "w-full md:w-1/2";
 
     useEffect(() => {
         if (storedName) setName(storedName);
