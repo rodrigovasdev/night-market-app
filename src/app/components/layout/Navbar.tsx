@@ -3,7 +3,7 @@
 import Button from "@/app/components/ui/Button"
 import SearchSection from "@/app/components/sections/search/SearchSection";
 import OffCanva from "@/app/components/ui/OffCanva";
-import { Bars3Icon, ShoppingCartIcon, UserIcon } from "@heroicons/react/24/outline"
+import { Bars3Icon, HomeIcon, ShoppingBagIcon, ShoppingCartIcon, UserIcon } from "@heroicons/react/24/outline"
 import Link from "next/link"
 import { useState } from "react"
 import PopUpLogin from "../sections/userLoginRegister/PopUpLogin"
@@ -31,8 +31,8 @@ export default function Navbar () {
     }
 
     const navLinks = [
-        { href: '/', label: 'Inicio' },
-        { href: '/products', label: 'Tienda' },
+        { href: '/', label: 'Inicio', icon: HomeIcon },
+        { href: '/products', label: 'Tienda', icon: ShoppingBagIcon },
     ]
 
     const name = useUserStore((state) => state.name) || 'Invitado';
@@ -81,8 +81,9 @@ export default function Navbar () {
                                     <Link
                                         href={link.href}
                                         onClick={closeMobileMenu}
-                                        className="block rounded-xl px-4 py-3 text-lg font-medium text-neutral-950 transition-colors hover:bg-neutral-100"
+                                        className="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-lg font-medium text-neutral-950 transition-colors hover:bg-neutral-100"
                                     >
+                                        <link.icon className="h-5 w-5 text-neutral-950" />
                                         {link.label}
                                     </Link>
                                 </li>
