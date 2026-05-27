@@ -14,7 +14,7 @@ interface ProductCardProps {
 function ProductCard({ title, shortDescription, price, imageUrl, id }: ProductCardProps) {
   return (
     <Link href={'/products/' + id}>
-      <div className="flex flex-col w-full 2xl:w-90 h-96 bg-white border-1 border-gray-200 rounded-lg hover:cursor-pointer hover:shadow-lg hover:border-1 hover:border-gray-900 transition duration-200 ease-in-out overflow-hidden">
+      <div className="flex flex-col w-90 md:w-full 2xl:w-90 h-96 bg-white border-1 border-gray-200 rounded-lg hover:cursor-pointer hover:shadow-lg hover:border-1 hover:border-gray-900 transition duration-200 ease-in-out overflow-hidden">
         <div className="relative w-full h-48 bg-gray-200 rounded-t-lg overflow-hidden flex items-center justify-center">
           <Image
             className="object-cover w-full h-full"
