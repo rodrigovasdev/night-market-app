@@ -5,6 +5,7 @@ import SearchSection from "@/app/components/sections/search/SearchSection";
 import OffCanva from "@/app/components/ui/OffCanva";
 import { Bars3Icon, HomeIcon, ShoppingBagIcon, ShoppingCartIcon, UserIcon } from "@heroicons/react/24/outline"
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 import { useState } from "react"
 import PopUpLogin from "../sections/userLoginRegister/PopUpLogin"
 import { useUserStore } from '@/store/user.store'
@@ -16,6 +17,7 @@ export default function Navbar () {
     const [menuOpen, setMenuOpen] = useState(false)
     const [searchSectionOpen, setSearchSectionOpen] = useState(false)
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+    const pathname = usePathname()
 
     const toggleMenu = () =>{
         setMenuOpen(!menuOpen)
@@ -152,16 +154,23 @@ export default function Navbar () {
                     <div className="hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
                         <ul className="flex flex-col gap-8 items-center p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white">
                             {navLinks.map((link) => (
+                                (() => {
+                                    const isRouteActive = link.href === '/' ? pathname === '/' : pathname.startsWith(link.href)
+                                    const isHighlighted = isRouteActive || (openMegaMenu && link.href === '/products')
+
+                                    return (
                                 <Link
                                     key={link.href}
                                     href={link.href}
                                     onMouseOver={() => link.href === '/products' ? setOpenMegaMenu(true) : setOpenMegaMenu(false)}
-                                    className={`block mx-auto py-2 px-3 text-gray-950 md:p-0 ${openMegaMenu && link.href === '/products' ? 'text-gray-950' : ''}`}
+                                    className={`block mx-auto py-2 px-3 md:p-0 ${isHighlighted ? 'text-gray-950' : 'text-gray-700'}`}
                                 >
-                                    <li className={`hover:border-b-2 px-1.5 ${openMegaMenu && link.href === '/products' ? 'border-b-2' : ''}`}>
+                                    <li className={`hover:border-b-2 px-1.5 ${isHighlighted ? 'border-b-2' : ''}`}>
                                         {link.label}
                                     </li>
                                 </Link>
+                                    )
+                                })()
                             ))}
 
                             {/* <Link href="/admin" className="block py-2 mx-auto px-3 text-gray-950 md:p-0">
