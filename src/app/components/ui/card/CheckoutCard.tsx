@@ -38,13 +38,15 @@ export default function CheckoutCard({ product, subtotal }: CheckoutCardProps) {
         <CardContainer width="w-full" rounded="md:rounded-xl" padding="p-0" bgClass="hover:cursor-pointer hover:shadow-lg hover:border-1 hover:border-gray-900 transition duration-200 ease-in-out bg-white border-b-1 md:border-1 border-gray-300">
                     <div className="flex justify-between">
                         <Link href={'/products/'+product.id} className="w-2/3 flex flex-col md:flex-row gap-3 p-2.5 cursor-pointer">
-                             <Image
-                                className=""
-                                src={mainImage}
-                                alt={product.name}
-                                width = {200}
-                                height = {200}
+                            <div className="relative w-24 h-24 md:w-28 md:h-28 shrink-0 overflow-hidden rounded-lg">
+                                <Image
+                                    className="object-cover"
+                                    src={mainImage}
+                                    alt={product.name}
+                                    fill
+                                    sizes="(min-width: 768px) 112px, 96px"
                                 />
+                            </div>
                             <div className="flex flex-col gap-3 my-auto "> 
                                 <h1 className="text-xl font-bold text-left">{product.name}</h1>
                                 <span className="text-gray-500 text-sm">{product.shortDescription}</span>
