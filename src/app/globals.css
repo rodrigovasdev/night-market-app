@@ -44,3 +44,33 @@ body {
   color: var(--foreground);
   font-family: var(--font-sans);
 }
+
+.pencil-writing {
+  animation: pencil-wiggle 0.55s ease-in-out infinite alternate;
+  transform-origin: bottom left;
+  display: inline-block;
+}
+
+@keyframes pencil-wiggle {
+  from { transform: rotate(-18deg) translateX(0); }
+  to   { transform: rotate(12deg) translateX(6px); }
+}
+
+.typing-dot {
+  display: inline-block;
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 9999px;
+  background-color: #a3a3a3;
+  animation: typing-bounce 1.1s ease-in-out infinite;
+}
+
+.typing-dot:nth-child(2) { animation-delay: 0.18s; }
+.typing-dot:nth-child(3) { animation-delay: 0.36s; }
+
+@keyframes typing-bounce {
+  0%, 60%, 100% { transform: translateY(0);    opacity: 0.45; }
+  30%           { transform: translateY(-6px); opacity: 1;    }
+}
+
+
