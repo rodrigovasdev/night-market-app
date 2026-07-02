@@ -14,7 +14,7 @@ interface ProductCardProps {
 function ProductCard({ title, shortDescription, price, imageUrl, id }: ProductCardProps) {
   return (
     <Link href={'/products/' + id}>
-      <div className="flex flex-col w-full 2xl:w-90 h-96 bg-white border-1 border-gray-200 rounded-lg hover:cursor-pointer hover:shadow-lg hover:border-1 hover:border-gray-900 transition duration-200 ease-in-out overflow-hidden">
+      <div className="flex flex-col w-90 md:w-full 2xl:w-90 h-96 bg-white border-1 border-gray-200 rounded-lg hover:cursor-pointer hover:shadow-lg hover:border-1 hover:border-gray-900 transition duration-200 ease-in-out overflow-hidden">
         <div className="relative w-full h-48 bg-gray-200 rounded-t-lg overflow-hidden flex items-center justify-center">
           <Image
             className="object-cover w-full h-full"
@@ -26,7 +26,7 @@ function ProductCard({ title, shortDescription, price, imageUrl, id }: ProductCa
         </div>
         <div className="flex flex-col px-3 gap-3 py-4 flex-grow justify-between">
           <div className="flex flex-col gap-2">
-            <span className="font-bold text-lg line-clamp-2">{title}</span>
+            <span className="font-bold text-md 2xl:text-lg line-clamp-1">{title}</span>
             <span className="text-gray-500 text-sm line-clamp-2">{shortDescription}</span>
           </div>
           <div className="flex flex-col gap-1">

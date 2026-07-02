@@ -33,6 +33,7 @@ export default function RootLayout({
         className={`${openSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen`}
       >
         <Navbar />
+        <PromoStrip />
         <Toaster richColors position="bottom-center" />
         <main className="">
           {children}

@@ -134,7 +134,7 @@ export default function Checkout() {
     }
 
     return (
-        <div className="w-full h-full flex flex-col md:flex-row py-10 gap-10 px-5 md:px-40 md:h-screen bg-white ">
+        <div className="w-full h-full flex flex-col md:flex-row py-10 gap-10 px-5 md:px-40 md:min-h-screen bg-white ">
             {showLoginPopup && <PopUpLogin onClick={() => setShowLoginPopup(false)} />}
             {showPurchaseSuccessPopup && (
                 <PopUpContainer onClose={handleClosePurchaseSuccessPopup}>
