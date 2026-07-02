@@ -4,6 +4,7 @@ import { Open_Sans } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/app/components/layout/Navbar";
 import Footer from "@/app/components/layout/Footer";
+import ChatFloatingButton from "@/app/components/layout/ChatFloatingButton";
 import { Toaster } from "sonner";
 
 const openSans = Open_Sans({
@@ -37,6 +38,7 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
+        <ChatFloatingButton />
       </body>
     </html>
   );

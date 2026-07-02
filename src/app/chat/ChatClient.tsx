@@ -5,7 +5,7 @@ import type { Socket } from "socket.io-client";
 import { SparklesIcon, PencilIcon, InformationCircleIcon, ExclamationCircleIcon } from "@heroicons/react/24/solid";
 import { UserIcon } from "@heroicons/react/24/outline";
 import Button from "@/app/components/ui/Button";
-import ProductCard from "@/app/components/ui/card/ProductCard";
+import ChatProductCard from "@/app/components/ui/card/ChatProductCard";
 import { getChatSocket } from "@/services/socket.service";
 
 type ChatProduct = {
@@ -94,17 +94,14 @@ function MessageBubble({ message }: { message: Message }) {
               {message.text}
             </p>
           ) : null}
-          <div className="flex gap-4 overflow-x-auto pb-2">
+          <div className="grid grid-cols-2 gap-2">
             {message.products.map((product) => (
-              <div key={product.id} className="w-56 shrink-0">
-                <ProductCard
-                  id={product.id}
-                  title={product.name}
-                  shortDescription={product.shortDescription}
-                  price={product.price}
-                  imageUrl={product.imageUrl ?? ""}
-                />
-              </div>
+              <ChatProductCard
+                key={product.id}
+                id={product.id}
+                name={product.name}
+                imageUrl={product.imageUrl ?? ""}
+              />
             ))}
           </div>
         </div>
@@ -183,22 +180,6 @@ export default function ChatClient() {
   return (
     <div className="grid gap-6">
       <div className="rounded-3xl border border-neutral-200 bg-white p-5 shadow-sm">
-        <div className="mb-4 flex items-center justify-between gap-4">
-          <div>
-            <h2 className="text-lg font-semibold text-neutral-950">Conversación</h2>
-            <p className="text-sm text-neutral-500">Conectado al namespace de chat por websocket.</p>
-          </div>
-          <Button
-            type="text"
-            content="Reiniciar"
-            variant="secondary"
-            width="w-auto"
-            paddingX="px-5"
-            paddingY="py-2"
-            heigth="h-auto"
-            onClick={resetChat}
-          />
-        </div>
 
         <div className="flex min-h-80 flex-col gap-3 rounded-2xl bg-neutral-50 p-4">
           {messages.length === 0 ? (

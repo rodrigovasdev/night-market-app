@@ -1,20 +1,13 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import Button from "@/app/components/ui/Button";
-import { getChatSocket } from "@/services/socket.service";
+import { useChatStore } from "@/store/chat.store";
 
 export default function ChatLaunchButton() {
-  const router = useRouter();
+  const openChat = useChatStore((s) => s.openChat);
 
   const handleStartChat = () => {
-    const socket = getChatSocket();
-
-    socket.emit("chat:message", {
-      message: "Hola, quiero iniciar el chat.",
-    });
-
-    router.push("/chat");
+    openChat();
   };
 
   return (
