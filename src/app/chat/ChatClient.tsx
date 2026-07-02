@@ -171,12 +171,6 @@ export default function ChatClient() {
     setInput("");
   };
 
-  const resetChat = () => {
-    setIsWaitingResponse(false);
-    socketRef.current?.emit("chat:reset");
-    addMessage("system", "conversación reiniciada");
-  };
-
   return (
     <div className="grid gap-6">
       <div className="rounded-3xl border border-neutral-200 bg-white p-5 shadow-sm">

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist_Mono } from "next/font/google";
 import { Open_Sans } from "next/font/google";
 import "./globals.css";
+import PromoStrip from "@/app/components/layout/PromoStrip";
 import Navbar from "@/app/components/layout/Navbar";
 import Footer from "@/app/components/layout/Footer";
 import ChatFloatingButton from "@/app/components/layout/ChatFloatingButton";

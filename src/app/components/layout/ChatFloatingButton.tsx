@@ -5,7 +5,7 @@ import ChatClient from "@/app/chat/ChatClient";
 import { useChatStore } from "@/store/chat.store";
 
 export default function ChatFloatingButton() {
-  const { isOpen, openChat, closeChat, toggleChat } = useChatStore();
+  const { isOpen, closeChat, toggleChat } = useChatStore();
 
   return (
     <>

@@ -13,7 +13,7 @@ export default function ChatLaunchButton() {
   return (
     <Button
       type="text"
-      content="Ir al chat"
+      content="Abrir Night-Bot"
       width="w-full md:w-3/5 2xl:w-2/5 text-center"
       paddingY="py-3"
       heigth="h-full"
