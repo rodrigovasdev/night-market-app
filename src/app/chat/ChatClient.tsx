@@ -173,9 +173,8 @@ export default function ChatClient() {
 
   return (
     <div className="grid gap-6">
-      <div className="rounded-3xl border border-neutral-200 bg-white p-5 shadow-sm">
 
-        <div className="flex min-h-80 flex-col gap-3 rounded-2xl bg-neutral-50 p-4">
+        <div className="flex min-h-80 flex-col gap-3 rounded-2xl bg-neutral-50">
           {messages.length === 0 ? (
             <p className="text-sm text-neutral-500">Aún no hay mensajes.</p>
           ) : (
@@ -200,7 +199,6 @@ export default function ChatClient() {
             </div>
           ) : null}
         </div>
-      </div>
 
       <div className="rounded-3xl border border-neutral-200 bg-white p-5 shadow-sm">
         <label className="mb-3 block text-sm font-medium text-neutral-700" htmlFor="chat-message">
