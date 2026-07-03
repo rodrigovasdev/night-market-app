@@ -1,11 +1,11 @@
 "use client";
 
-import { SparklesIcon, XMarkIcon } from "@heroicons/react/24/solid";
+import { SparklesIcon, XMarkIcon, DocumentIcon } from "@heroicons/react/24/solid";
 import ChatClient from "@/app/chat/ChatClient";
 import { useChatStore } from "@/store/chat.store";
 
 export default function ChatFloatingButton() {
-  const { isOpen, closeChat, toggleChat } = useChatStore();
+  const { isOpen, isConnected, closeChat, toggleChat, messages, clearMessages } = useChatStore();
 
   return (
     <>
@@ -17,14 +17,30 @@ export default function ChatFloatingButton() {
             <div className="flex items-center gap-2">
               <SparklesIcon className="h-5 w-5 text-neutral-950" />
               <span className="font-semibold text-neutral-950">Night-Bot</span>
+              {isConnected && (
+                <span className="rounded-full border border-green-500 px-2 py-0.5 text-xs font-medium text-green-600">
+                  en línea
+                </span>
+              )}
             </div>
-            <button
-              onClick={closeChat}
-              aria-label="Cerrar chat"
-              className="flex h-8 w-8 items-center justify-center rounded-full text-neutral-500 transition hover:bg-neutral-100 hover:text-neutral-950"
-            >
-              <XMarkIcon className="h-5 w-5" />
-            </button>
+            <div className="flex items-center gap-1">
+              {messages.length > 0 && (
+                <button
+                  onClick={clearMessages}
+                  aria-label="Limpiar chat"
+                  className="flex h-8 w-8 items-center justify-center rounded-full text-neutral-500 transition hover:bg-neutral-100 hover:text-neutral-950"
+                >
+                  <DocumentIcon className="h-5 w-5" />
+                </button>
+              )}
+              <button
+                onClick={closeChat}
+                aria-label="Cerrar chat"
+                className="flex h-8 w-8 items-center justify-center rounded-full text-neutral-500 transition hover:bg-neutral-100 hover:text-neutral-950"
+              >
+                <XMarkIcon className="h-5 w-5" />
+              </button>
+            </div>
           </div>
 
           {/* Chat content */}

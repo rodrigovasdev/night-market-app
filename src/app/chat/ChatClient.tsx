@@ -2,28 +2,12 @@
 
 import { useEffect, useRef, useState } from "react";
 import type { Socket } from "socket.io-client";
-import { SparklesIcon, PencilIcon, InformationCircleIcon, ExclamationCircleIcon } from "@heroicons/react/24/solid";
+import { SparklesIcon, PencilIcon, ExclamationCircleIcon } from "@heroicons/react/24/solid";
 import { UserIcon } from "@heroicons/react/24/outline";
 import Button from "@/app/components/ui/Button";
 import ChatProductCard from "@/app/components/ui/card/ChatProductCard";
 import { getChatSocket } from "@/services/socket.service";
-
-type ChatProduct = {
-  id: number;
-  name: string;
-  shortDescription: string;
-  price: number;
-  imageUrl: string | null;
-};
-
-type MessageRole = "user" | "bot" | "system" | "error";
-
-type Message = {
-  id: string;
-  role: MessageRole;
-  text: string;
-  products?: ChatProduct[];
-};
+import { useChatStore, type ChatProduct, type ChatMessage } from "@/store/chat.store";
 
 type ChatReadyPayload = {
   message: string;
@@ -47,15 +31,15 @@ function BotAvatar() {
   );
 }
 
-function MessageBubble({ message }: { message: Message }) {
-  if (message.role === "system") {
-    return (
-      <div className="flex items-center justify-center gap-2 py-1">
-        <InformationCircleIcon className="h-4 w-4 shrink-0 text-neutral-400" />
-        <p className="text-xs text-neutral-400">{message.text}</p>
-      </div>
-    );
-  }
+function MessageBubble({ message }: { message: ChatMessage }) {
+  // if (message.role === "system") {
+  //   return (
+  //     <div className="flex items-center justify-center gap-2 py-1">
+  //       <InformationCircleIcon className="h-4 w-4 shrink-0 text-neutral-400" />
+  //       <p className="text-xs text-neutral-400">{message.text}</p>
+  //     </div>
+  //   );
+  // }
 
   if (message.role === "error") {
     return (
@@ -84,7 +68,7 @@ function MessageBubble({ message }: { message: Message }) {
   }
 
   // bot — con o sin productos
-  if (message.products && message.products.length > 0) {
+  if (message.products && message.products.length > 0 ) {
     return (
       <div className="flex items-start gap-3">
         <BotAvatar />
@@ -108,35 +92,36 @@ function MessageBubble({ message }: { message: Message }) {
       </div>
     );
   }
-
-  return (
-    <div className="flex items-end gap-3">
-      <BotAvatar />
-      <p className="rounded-2xl rounded-bl-sm bg-white px-4 py-2.5 text-sm text-neutral-700 shadow-sm">
-        {message.text}
-      </p>
-    </div>
-  );
+  if (message.role != "system") {
+    return (
+      <div className="flex items-end gap-3">
+        <BotAvatar />
+        <p className="rounded-2xl rounded-bl-sm bg-white px-4 py-2.5 text-sm text-neutral-700 shadow-sm">
+          {message.text}
+        </p>
+      </div>
+    );
+  }
 }
 
 export default function ChatClient() {
   const socketRef = useRef<Socket | null>(null);
-  const [messages, setMessages] = useState<Message[]>([]);
+  const messages = useChatStore((s) => s.messages);
+  const addMessage = useChatStore((s) => s.addMessage);
+  const setConnected = useChatStore((s) => s.setConnected);
+  const isConnected = useChatStore((s) => s.isConnected);
   const [input, setInput] = useState("");
   const [isWaitingResponse, setIsWaitingResponse] = useState(false);
-
-  const addMessage = (role: MessageRole, text: string, products?: ChatProduct[]) => {
-    setMessages((prev) => [
-      ...prev,
-      { id: `${Date.now()}-${Math.random()}`, role, text, products },
-    ]);
-  };
 
   useEffect(() => {
     const socket = getChatSocket();
     socketRef.current = socket;
 
+    const handleConnect = () => setConnected(true);
+    const handleDisconnect = () => setConnected(false);
+
     const handleReady = (payload: ChatReadyPayload) => {
+      setConnected(true);
       addMessage("system", payload.message);
     };
 
@@ -150,16 +135,22 @@ export default function ChatClient() {
       addMessage("error", error?.message ?? "Error desconocido");
     };
 
+    if (socket.connected) setConnected(true);
+
+    socket.on("connect", handleConnect);
+    socket.on("disconnect", handleDisconnect);
     socket.on("chat:ready", handleReady);
     socket.on("chat:response", handleResponse);
     socket.on("exception", handleException);
 
     return () => {
+      socket.off("connect", handleConnect);
+      socket.off("disconnect", handleDisconnect);
       socket.off("chat:ready", handleReady);
       socket.off("chat:response", handleResponse);
       socket.off("exception", handleException);
     };
-  }, []);
+  }, [addMessage, setConnected]);
 
   const sendMessage = () => {
     const trimmedInput = input.trim();
@@ -175,8 +166,13 @@ export default function ChatClient() {
     <div className="grid gap-6">
 
         <div className="flex min-h-80 flex-col gap-3 rounded-2xl bg-neutral-50">
-          {messages.length === 0 ? (
-            <p className="text-sm text-neutral-500">Aún no hay mensajes.</p>
+          {!isConnected ? (
+            <div className="flex flex-1 items-center justify-center gap-2 py-6">
+              <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-neutral-950">
+                <SparklesIcon className="h-4 w-4 animate-pulse text-white" />
+              </span>
+              <p className="text-sm text-neutral-400">Conectando con Night-Bot...</p>
+            </div>
           ) : (
             messages.map((message) => (
               <MessageBubble key={message.id} message={message} />
@@ -211,8 +207,9 @@ export default function ChatClient() {
                 sendMessage();
               }
             }}
-            placeholder="Escribe tu mensaje"
-            className="h-12 py-3 flex-1 rounded-full border border-neutral-300 px-4 text-sm text-neutral-950 outline-none transition focus:border-neutral-950"
+            placeholder={isConnected ? "Escribe tu mensaje" : "Esperando conexión..."}
+            disabled={!isConnected}
+            className="h-12 py-3 flex-1 rounded-full border border-neutral-300 px-4 text-sm text-neutral-950 outline-none transition focus:border-neutral-950 disabled:cursor-not-allowed disabled:opacity-50"
           />
           <Button
             type="text"
@@ -223,7 +220,7 @@ export default function ChatClient() {
             paddingY="py-3"
             heigth="h-auto"
             onClick={sendMessage}
-            disabled={isWaitingResponse}
+            disabled={!isConnected || isWaitingResponse}
           />
         </div>
       </div>
