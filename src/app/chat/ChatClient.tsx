@@ -196,7 +196,7 @@ export default function ChatClient() {
                 <span className="typing-dot" />
                 <span className="typing-dot" />
               </span>
-              <p className="text-sm text-neutral-500">El bot está escribiendo...</p>
+              <p className="text-sm text-neutral-500">night-bot está escribiendo...</p>
             </div>
           ) : null}
         </div>
