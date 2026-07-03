@@ -195,15 +195,12 @@ export default function ChatClient() {
                 <span className="typing-dot" />
                 <span className="typing-dot" />
               </span>
-              <p className="text-sm text-neutral-500">night-bot está escribiendo...</p>
+              <p className="text-sm text-neutral-500">Night-bot está escribiendo...</p>
             </div>
           ) : null}
         </div>
 
       <div className="rounded-3xl border border-neutral-200 bg-white p-5 shadow-sm">
-        <label className="mb-3 block text-sm font-medium text-neutral-700" htmlFor="chat-message">
-          Escribe tu mensaje
-        </label>
         <div className="flex flex-col gap-3 md:flex-row">
           <input
             id="chat-message"
@@ -215,7 +212,7 @@ export default function ChatClient() {
               }
             }}
             placeholder="Escribe tu mensaje"
-            className="h-12 flex-1 rounded-full border border-neutral-300 px-4 text-sm text-neutral-950 outline-none transition focus:border-neutral-950"
+            className="h-12 py-3 flex-1 rounded-full border border-neutral-300 px-4 text-sm text-neutral-950 outline-none transition focus:border-neutral-950"
           />
           <Button
             type="text"
