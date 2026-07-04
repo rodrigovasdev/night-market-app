@@ -1,9 +1,9 @@
 import React from 'react';
-import ProductImage from '@/app/components/sections/product/ProductImage';
-import ProductInfo from '@/app/components/sections/product/ProductInfo';
-import RelatedProducts from '@/app/components/sections/product/RelatedProducts';
+import ProductImage from '@/components/products/ProductImage';
+import ProductInfo from '@/components/products/ProductInfo';
+import RelatedProducts from '@/components/products/RelatedProducts';
 import { getProduct } from '@/services/products.service';
-import ReviewForm from '@/app/components/sections/product/ReviewForm';
+import ReviewForm from '@/components/products/ReviewForm';
 
 const Details = async ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = await params;

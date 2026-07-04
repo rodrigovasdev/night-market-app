@@ -1,10 +1,10 @@
 
-import Start from "@/app/components/sections/landing/Start";
-import FeaturedProducts from "@/app/components/sections/landing/FeaturedProducts";
-import TopSellingProducts from "@/app/components/sections/landing/TopSellingProducts";
-import Jumbotron from "@/app/components/sections/landing/Jumbotron";
-import OfferCardsSection from "@/app/components/sections/landing/OfferCardsSection";
-import NightBotPresentation from "@/app/components/sections/landing/NightBotPresentation";
+import Start from "@/components/home/Start";
+import FeaturedProducts from "@/components/home/FeaturedProducts";
+import TopSellingProducts from "@/components/home/TopSellingProducts";
+import Jumbotron from "@/components/home/Jumbotron";
+import OfferCardsSection from "@/components/home/OfferCardsSection";
+import NightBotPresentation from "@/components/home/NightBotPresentation";
 export default function Home() {
   return (
     <>

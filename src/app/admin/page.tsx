@@ -1,10 +1,10 @@
-import React from 'react'
-import AdminInfoCard from '../components/ui/card/AdminInfoCard'
-import TopSellList from '../components/ui/TopSellList'
+﻿import React from 'react'
+import AdminInfoCard from '@/components/ui/card/AdminInfoCard'
+import TopSellList from '@/components/ui/TopSellList'
 import { CurrencyDollarIcon, ShoppingCartIcon, CreditCardIcon, CubeIcon} from '@heroicons/react/24/outline'
-import GraphicSales from '../components/ui/GraphicSales'
-// import ProductManagement from '../components/ui/card/ProductManagement'
-import CardContainer from '../components/ui/CardContainer'
+import GraphicSales from '@/components/ui/GraphicSales'
+// import ProductManagement from '@/components/ui/card/ProductManagement'
+import CardContainer from '@/components/ui/CardContainer'
 
 
 function page() {
