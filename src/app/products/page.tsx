@@ -1,7 +1,7 @@
-import ElementosProducts from "../components/sections/product/ElementsProducts";
+import ProductsGrid from "@/components/products/ProductsGrid";
 
 export default function Products() {
     return (
-        <ElementosProducts></ElementosProducts>
+        <ProductsGrid></ProductsGrid>
     );
 }
