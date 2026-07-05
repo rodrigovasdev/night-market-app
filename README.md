@@ -1,4 +1,14 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Night Market
+
+Sitio web de ecommerce construido con [Next.js](https://nextjs.org). Permite a los usuarios explorar productos, filtrarlos por categoría, agregar artículos al carrito y realizar compras. Incluye un asistente de chat en tiempo real (Night-Bot), panel de administración con métricas de ventas y autenticación de usuarios.
+
+## Tecnologías principales
+
+- **Next.js 15** — App Router, Server Components
+- **TypeScript**
+- **Tailwind CSS**
+- **Socket.io** — Chat en tiempo real
+- **Zustand** — Estado global (carrito, usuario, chat)
 
 ## Getting Started
 
