@@ -10,8 +10,7 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-open-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-plus-jakarta-sans);
   --color-night: #0a0f0d;
   --color-lima: #00C851;
   --color-electric: #007BFF;
