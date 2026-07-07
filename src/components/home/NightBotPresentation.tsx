@@ -61,7 +61,7 @@ export default function NightBotPresentation() {
                         {features.map((feature) => (
                             <div
                                 key={feature.title}
-                                className="flex items-start gap-4 border border-gray-200 rounded-xl px-5 py-4"
+                                className="flex items-start gap-4 border border-gray-200 px-5 py-4"
                             >
                                 <div className="shrink-0 mt-0.5">{feature.icon}</div>
                                 <div>

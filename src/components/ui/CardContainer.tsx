@@ -3,7 +3,7 @@ export default function CardContainer({ children, bgClass, shadow, padding, roun
     const paddingClass = padding ? padding + ' ' : ' py-10 px-4 lg:px-15 ';
     const marginClass = margin ? ' ' + margin : ' ';
     const shadowClass = shadow ? " shadow-md " : " shadow-none ";
-    const roundedClass = rounded ? rounded + ' ' : " rounded-xl ";
+    const roundedClass = rounded ? rounded + ' ' : " ";
     const widthClass =  width ? width + ' ': ' w-full '
     const secondDivClass = roundedClass + paddingClass + propClass + shadowClass + widthClass + marginClass;
     return (
