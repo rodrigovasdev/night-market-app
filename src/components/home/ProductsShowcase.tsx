@@ -68,6 +68,7 @@ export default function ProductsShowcase({
                                   shortDescription={product.shortDescription}
                                   price={product.price}
                                   imageUrl={product.images[0]?.url || "/assets/ecommerce.jpg"}
+                                  imageUrl2={product.images[1]?.url || "/assets/ecommerce.jpg"}
                                   id={product.id}
                               />
                           ))}
