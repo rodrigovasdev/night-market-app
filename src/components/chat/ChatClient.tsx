@@ -25,7 +25,7 @@ function isProductResponse(payload: ChatResponse) {
 
 function BotAvatar() {
   return (
-    <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-neutral-950 shadow-sm">
+    <span className="flex h-7 w-7 shrink-0 items-center justify-center bg-neutral-950 shadow-sm">
       <SparklesIcon className="h-4 w-4 text-white" />
     </span>
   );
@@ -57,10 +57,10 @@ function MessageBubble({ message }: { message: ChatMessage }) {
   if (message.role === "user") {
     return (
       <div className="flex items-end justify-end gap-3">
-        <p className="rounded-2xl rounded-br-sm bg-neutral-950 px-4 py-2.5 text-sm text-white shadow-sm">
+        <p className="rounded-br-sm bg-neutral-950 px-4 py-2.5 text-sm text-white shadow-sm">
           {message.text}
         </p>
-        <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-neutral-200 bg-white shadow-sm">
+        <span className="flex h-7 w-7 shrink-0 items-center justify-center border border-neutral-200 bg-white shadow-sm">
           <UserIcon className="h-4 w-4 text-neutral-950" />
         </span>
       </div>
@@ -74,7 +74,7 @@ function MessageBubble({ message }: { message: ChatMessage }) {
         <BotAvatar />
         <div className="flex min-w-0 flex-1 flex-col gap-3">
           {message.text ? (
-            <p className="rounded-2xl rounded-tl-sm bg-white px-4 py-2.5 text-sm text-neutral-700 shadow-sm">
+            <p className="rounded-tl-sm bg-white px-4 py-2.5 text-sm text-neutral-700 shadow-sm">
               {message.text}
             </p>
           ) : null}
@@ -96,7 +96,7 @@ function MessageBubble({ message }: { message: ChatMessage }) {
     return (
       <div className="flex items-end gap-3">
         <BotAvatar />
-        <p className="rounded-2xl rounded-bl-sm bg-white px-4 py-2.5 text-sm text-neutral-700 shadow-sm">
+        <p className="rounded-bl-sm bg-white px-4 py-2.5 text-sm text-neutral-700 shadow-sm">
           {message.text}
         </p>
       </div>
@@ -165,7 +165,7 @@ export default function ChatClient() {
   return (
     <div className="grid gap-6">
 
-        <div className="flex min-h-80 flex-col gap-3 rounded-2xl bg-neutral-50">
+        <div className="flex min-h-80 flex-col gap-3  bg-neutral-50">
           {!isConnected ? (
             <div className="flex flex-1 items-center justify-center gap-2 py-6">
               <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-neutral-950">
@@ -180,7 +180,7 @@ export default function ChatClient() {
           )}
 
           {isWaitingResponse ? (
-            <div className="flex items-center gap-3 rounded-2xl bg-white px-4 py-3 shadow-sm">
+            <div className="flex items-center gap-3 bg-white px-4 py-3 shadow-sm">
               <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-neutral-950">
                 <span className="pencil-writing" aria-hidden="true">
                   <PencilIcon className="h-4 w-4 text-white" />
@@ -196,7 +196,7 @@ export default function ChatClient() {
           ) : null}
         </div>
 
-      <div className="rounded-3xl border border-neutral-200 bg-white p-5 shadow-sm">
+      <div className="border border-neutral-200 bg-white p-5 shadow-sm">
         <div className="flex flex-col gap-3 md:flex-row">
           <input
             id="chat-message"
@@ -209,7 +209,7 @@ export default function ChatClient() {
             }}
             placeholder={isConnected ? "Escribe tu mensaje" : "Esperando conexión..."}
             disabled={!isConnected}
-            className="h-12 py-3 flex-1 rounded-full border border-neutral-300 px-4 text-sm text-neutral-950 outline-none transition focus:border-neutral-950 disabled:cursor-not-allowed disabled:opacity-50"
+            className="h-12 py-3 flex-1 border border-neutral-300 px-4 text-sm text-neutral-950 outline-none transition focus:border-neutral-950 disabled:cursor-not-allowed disabled:opacity-50"
           />
           <Button
             type="text"

@@ -11,7 +11,7 @@ export default function ChatFloatingButton() {
     <>
       {/* Chat panel */}
       {isOpen && (
-        <div className="fixed bottom-24 right-4 z-50 flex w-[min(420px,calc(100vw-2rem))] flex-col rounded-3xl border border-neutral-200 bg-neutral-50 shadow-2xl">
+        <div className="fixed bottom-24 right-4 z-50 flex w-[min(420px,calc(100vw-2rem))] flex-col  border border-neutral-200 bg-neutral-50 shadow-2xl">
           {/* Panel header */}
           <div className="flex items-center justify-between rounded-t-3xl border-b border-neutral-200 bg-white px-5 py-4">
             <div className="flex items-center gap-2">
