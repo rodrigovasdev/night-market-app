@@ -17,7 +17,7 @@ interface ButtonProps {
 import Link from "next/link";
 
   const Button = ({ variant, content, type = "text", children, width = "w-20", heigth = "h-10" , paddingY = "py-2" , paddingX = "px-4", aux, href = '',border, onClick, disabled}: ButtonProps) => {
-    const sharedClasses = `relative rounded-full font-semibold text-sm text-align-center ${disabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'} ${aux}`;
+    const sharedClasses = `relative font-semibold text-sm text-align-center ${disabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'} ${aux}`;
     const arrayClass = disabled
     ? `text-neutral-500 bg-neutral-100 border-1 border-neutral-200 ${sharedClasses} ${paddingY} ${paddingX} ${width} ${heigth}`
     : variant === "primary"
