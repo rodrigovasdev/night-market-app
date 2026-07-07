@@ -44,10 +44,10 @@ export default function ProductsShowcase({
                         ? Array.from({ length: 4 }).map((_, index) => (
                               <div
                                   key={`showcase-skeleton-${index}`}
-                                  className="flex flex-col w-full 2xl:w-90 h-96 bg-white border border-gray-200 rounded-lg overflow-hidden animate-pulse"
+                                  className="flex flex-col w-full 2xl:w-90 h-96 bg-white border-gray-200 overflow-hidden animate-pulse"
                                   aria-hidden="true"
                               >
-                                  <div className="w-full h-48 bg-gray-200" />
+                                  <div className="w-full h-full bg-gray-200" />
                                   <div className="flex flex-col px-3 gap-3 py-4 flex-grow justify-between">
                                       <div className="flex flex-col gap-2">
                                           <div className="h-6 w-3/4 bg-gray-200 rounded" />
