@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import { Geist_Mono } from "next/font/google";
-import { Open_Sans } from "next/font/google";
+import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import PromoStrip from "@/components/layout/PromoStrip";
 import Navbar from "@/components/layout/Navbar";
@@ -8,13 +7,8 @@ import Footer from "@/components/layout/Footer";
 import ChatFloatingButton from "@/components/layout/ChatFloatingButton";
 import { Toaster } from "sonner";
 
-const openSans = Open_Sans({
-  variable: "--font-open-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const plusJakartaSans = Plus_Jakarta_Sans({
+  variable: "--font-plus-jakarta-sans",
   subsets: ["latin"],
 });
 
@@ -31,7 +25,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full">
       <body
-        className={`${openSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen`}
+        className={`${plusJakartaSans.variable} ${plusJakartaSans.className} antialiased flex flex-col min-h-screen`}
       >
         <Navbar />
         <PromoStrip />
