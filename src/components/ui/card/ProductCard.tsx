@@ -19,11 +19,11 @@ function ProductCard({ title, shortDescription, price, imageUrl, id, imageUrl2 }
   return (
     <Link href={'/products/' + id}>
       <div
-        className="flex flex-col w-90 md:w-full 2xl:w-90 h-96 bg-white  border-gray-200 rounded-lg hover:cursor-pointer hover:shadow-lg hover:border-1 hover:border-gray-900 transition duration-200 ease-in-out overflow-hidden"
+        className="flex flex-col w-90 md:w-full 2xl:w-90 h-96 bg-white  border-gray-200  hover:cursor-pointer hover:shadow-lg hover:border-1 hover:border-gray-900 transition duration-200 ease-in-out overflow-hidden"
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
       >
-        <div className="relative w-full h-full bg-gray-200 rounded-t-lg overflow-hidden flex items-center justify-center">
+        <div className="relative w-full h-full bg-gray-200  overflow-hidden flex items-center justify-center">
           <Image
             className="object-cover w-full h-full transition duration-200 ease-in-out"
             src={currentImage}
