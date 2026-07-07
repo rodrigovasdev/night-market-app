@@ -22,17 +22,23 @@ export default function RelatedProducts() {
         {isLoading
           ? Array.from({ length: 4 }).map((_, index) => (
               <div
-                key={`related-skeleton-${index}`}
-                className="flex flex-col w-40 md:w-56 h-56 md:h-72 bg-white border border-gray-200 rounded-lg overflow-hidden animate-pulse"
-                aria-hidden="true"
-              >
-                <div className="w-full h-28 md:h-36 bg-gray-200" />
-                <div className="flex flex-col gap-2 p-3">
-                  <div className="h-5 w-4/5 bg-gray-200 rounded" />
-                  <div className="h-4 w-full bg-gray-100 rounded" />
-                  <div className="h-4 w-2/3 bg-gray-100 rounded" />
-                </div>
-              </div>
+                                  key={`showcase-skeleton-${index}`}
+                                  className="flex flex-col w-full 2xl:w-90 h-96 bg-white border-gray-200 overflow-hidden animate-pulse"
+                                  aria-hidden="true"
+                              >
+                                  <div className="w-full h-full py-36 bg-gray-200" />
+                                  <div className="flex flex-col px-3 gap-3 py-4 flex-grow justify-between">
+                                      <div className="flex flex-col gap-2">
+                                          <div className="h-6 w-3/4 bg-gray-200 rounded" />
+                                          <div className="h-4 w-full bg-gray-100 rounded" />
+                                          <div className="h-4 w-5/6 bg-gray-100 rounded" />
+                                      </div>
+                                      <div className="flex flex-col gap-2">
+                                          <div className="h-6 w-1/3 bg-gray-200 rounded" />
+                                          <div className="h-4 w-1/2 bg-gray-100 rounded" />
+                                      </div>
+                                  </div>
+                              </div>
             ))
           : products.map((product) => (
             <ProductCard
