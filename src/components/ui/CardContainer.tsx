@@ -1,5 +1,5 @@
 export default function CardContainer({ children, bgClass, shadow, padding, rounded, width, margin, id }: {width?: string, children?: React.ReactNode, bgClass?: string, shadow?: boolean, padding?: string, rounded?: string, margin?: string, id?: string}) {
-    const propClass = bgClass ? bgClass + ' ' : ' border-1 border-gray-300 ';
+    const propClass = bgClass ? bgClass + ' ' : 'border-0 md:border-1 border-gray-300 ';
     const paddingClass = padding ? padding + ' ' : ' py-10 px-4 lg:px-15 ';
     const marginClass = margin ? ' ' + margin : ' ';
     const shadowClass = shadow ? " shadow-md " : " shadow-none ";
