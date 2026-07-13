@@ -175,7 +175,7 @@ export default function Checkout() {
                 </PopUpContainer>
             )}
             <div className="basis-2/3">
-                <div className="flex w-full mx-auto flex-col rounded-xl border-1 border-gray-300">
+                <div className="flex w-full mx-auto flex-col border-1 border-gray-300">
                     <div className="flex px-10 py-3 md:py-10 items-center justify-between border-b-1 border-gray-300 md:border-0">
                         <div className="flex gap-4 items-center">
                             <h1 className="font-bold text-2xl md:text-4xl">{title}</h1>
@@ -197,7 +197,7 @@ export default function Checkout() {
             {
                 hasItems && (
                     <div className="basis-1/3">
-                        <div className="flex w-full mx-auto flex-col rounded-xl border-1 border-gray-300">
+                        <div className="flex w-full mx-auto flex-col border-1 border-gray-300">
                             <div className="flex px-10 py-10 items-center justify-between">
                                 <h1 className="font-bold text-2xl">RESUMEN DE COMPRA</h1>
                                 <ShoppingBagIcon className={`w-8 h-8 text-neutral-950`} />
