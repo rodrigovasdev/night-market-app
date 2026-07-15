@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Image from "next/image";
 import Link from 'next/link';
 import { formatPriceCLP } from "@/utils/formatPrice";
+import { registerProductVisit } from "@/services/products.service";
 
 interface ProductCardProps {
   title: string;
@@ -16,8 +17,12 @@ function ProductCard({ title, shortDescription, price, imageUrl, id, imageUrl2 }
   const [hovered, setHovered] = useState(false);
   const currentImage = hovered && imageUrl2 ? imageUrl2 : imageUrl;
 
+  const handleClick = () => {
+    registerProductVisit(id);
+  };
+
   return (
-    <Link href={'/products/' + id}>
+    <Link href={'/products/' + id} onClick={handleClick}>
       <div
         className="flex flex-col w-90 md:w-full 2xl:w-90 h-96 bg-white  border-gray-200  hover:cursor-pointer hover:shadow-lg hover:border-1 hover:border-gray-900 transition duration-200 ease-in-out overflow-hidden"
         onMouseEnter={() => setHovered(true)}

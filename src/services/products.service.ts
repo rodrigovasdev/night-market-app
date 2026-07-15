@@ -105,3 +105,9 @@ export async function getProductReviews(productId: number): Promise<ProductRevie
   return response.json();
 }
 
+export async function registerProductVisit(productId: number): Promise<void> {
+  await fetch(`${API_URL}/products/${productId}/visits`, {
+    method: 'POST',
+  });
+}
+
