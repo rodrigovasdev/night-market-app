@@ -22,13 +22,13 @@ function ProductCard({ title, shortDescription, price, imageUrl, id, imageUrl2 }
   };
 
   return (
-    <Link href={'/products/' + id} onClick={handleClick}>
+    <Link href={'/products/' + id} onClick={handleClick} className="block w-full min-w-0 max-w-90 md:max-w-none">
       <div
-        className="flex flex-col w-90 md:w-full 2xl:w-90 h-96 bg-white  border-gray-200  hover:cursor-pointer hover:shadow-lg hover:border-1 hover:border-gray-900 transition duration-200 ease-in-out overflow-hidden"
+        className="flex h-96 w-full min-w-0 flex-col overflow-hidden border border-transparent bg-white hover:cursor-pointer hover:shadow-lg hover:border-gray-900 transition duration-200 ease-in-out"
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
       >
-        <div className="relative w-full h-full bg-gray-200  overflow-hidden flex items-center justify-center">
+        <div className="relative h-64 w-full shrink-0 overflow-hidden bg-gray-200">
           <Image
             className="object-cover w-full h-full transition duration-200 ease-in-out"
             src={currentImage}
@@ -37,14 +37,14 @@ function ProductCard({ title, shortDescription, price, imageUrl, id, imageUrl2 }
             sizes="288px"
           />
         </div>
-        <div className="flex flex-col px-3 gap-3 py-2 flex-grow justify-between">
-          <div className="flex flex-col gap-2">
-            <span className="font-bold text-md 2xl:text-lg line-clamp-1">{title}</span>
-            <span className="text-gray-500 text-sm line-clamp-1">{shortDescription}</span>
+        <div className="flex min-h-0 min-w-0 flex-1 flex-col justify-between gap-3 overflow-hidden px-3 py-2">
+          <div className="flex min-w-0 flex-col gap-2">
+            <span className="h-7 truncate text-md font-bold leading-7 2xl:text-lg">{title}</span>
+            <span className="h-5 truncate text-sm leading-5 text-gray-500">{shortDescription}</span>
           </div>
-          <div className="flex justify-between gap-1">
-            <span className="text-slate-900 font-bold text-md">{formatPriceCLP(price)}</span>
-            <span className="text-gray-500 text-sm">Envío gratis</span>
+          <div className="flex min-w-0 items-center justify-between gap-1">
+            <span className="min-w-0 truncate text-slate-900 font-bold text-md">{formatPriceCLP(price)}</span>
+            <span className="shrink-0 whitespace-nowrap text-gray-500 text-sm">Envío gratis</span>
           </div>
         </div>
       </div>
