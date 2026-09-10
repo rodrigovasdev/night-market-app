@@ -163,9 +163,9 @@ export default function ChatClient() {
   };
 
   return (
-    <div className="grid gap-6">
+    <div className="flex min-h-0 flex-1 flex-col gap-3 md:grid md:gap-6">
 
-        <div className="flex min-h-80 flex-col gap-3  bg-neutral-50">
+        <div className="flex min-h-0 flex-1 flex-col gap-3 overflow-y-auto overscroll-contain break-words bg-neutral-50 md:min-h-80 md:overflow-visible">
           {!isConnected ? (
             <div className="flex flex-1 items-center justify-center gap-2 py-6">
               <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-neutral-950">
@@ -196,7 +196,7 @@ export default function ChatClient() {
           ) : null}
         </div>
 
-      <div className="border border-neutral-200 bg-white p-5 shadow-sm">
+      <div className="shrink-0 border border-neutral-200 bg-white p-3 shadow-sm md:p-5">
         <div className="flex flex-col gap-3 md:flex-row">
           <input
             id="chat-message"
@@ -209,7 +209,7 @@ export default function ChatClient() {
             }}
             placeholder={isConnected ? "Escribe tu mensaje" : "Esperando conexión..."}
             disabled={!isConnected}
-            className="h-12 py-3 flex-1 border border-neutral-300 px-4 text-sm text-neutral-950 outline-none transition focus:border-neutral-950 disabled:cursor-not-allowed disabled:opacity-50"
+            className="h-12 py-3 flex-1 border border-neutral-300 px-4 text-base md:text-sm text-neutral-950 outline-none transition focus:border-neutral-950 disabled:cursor-not-allowed disabled:opacity-50"
           />
           <Button
             type="text"
