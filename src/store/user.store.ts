@@ -14,10 +14,12 @@ interface UserState {
   name: string | null;
   mail: string | null;
   discountSent: boolean;
+  discountPopupDismissed: boolean;
   demoContactSent: boolean;
   sentReviews: StoredProductReview[];
   setUser: (id: number, name: string, mail: string | null) => void;
   setDiscountSent: (sent: boolean) => void;
+  dismissDiscountPopup: () => void;
   setDemoContactSent: (sent: boolean) => void;
   saveSentReview: (review: StoredProductReview) => void;
   clearUser: () => void;
@@ -30,10 +32,15 @@ export const useUserStore = create<UserState>()(
         name: null,
         mail: null,
         discountSent: false,
+        discountPopupDismissed: false,
         demoContactSent: false,
         sentReviews: [],
         setUser: (id, name, mail) => set({ id, name, mail }),
-        setDiscountSent: (sent) => set({ discountSent: sent }),
+        setDiscountSent: (sent) => set((state) => ({
+          discountSent: sent,
+          discountPopupDismissed: state.discountPopupDismissed || sent,
+        })),
+        dismissDiscountPopup: () => set({ discountPopupDismissed: true }),
         setDemoContactSent: (sent) => set({ demoContactSent: sent }),
         saveSentReview: (review) =>
             set((state) => ({
