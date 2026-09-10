@@ -6,7 +6,7 @@ import OffCanva from "@/components/ui/OffCanva";
 import { Bars3Icon, HomeIcon, ShoppingBagIcon, ShoppingCartIcon, UserIcon } from "@heroicons/react/24/outline"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import PopUpLogin from "@/components/auth/PopUpLogin"
 import { useUserStore } from '@/store/user.store'
 import { useCartStore } from '@/store/cart.store'
@@ -18,6 +18,29 @@ export default function Navbar () {
     const [searchSectionOpen, setSearchSectionOpen] = useState(false)
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
     const pathname = usePathname()
+    const [navbarHidden, setNavbarHidden] = useState(false)
+
+    useEffect(() => {
+        let previousScrollY = Math.max(0, window.scrollY)
+        const mobileViewport = window.matchMedia('(max-width: 767px)')
+
+        const handleScroll = () => {
+            const currentScrollY = Math.max(0, window.scrollY)
+            if (Math.abs(currentScrollY - previousScrollY) < 5 && currentScrollY > 96) return
+
+            setNavbarHidden(mobileViewport.matches && currentScrollY > 96 && currentScrollY > previousScrollY)
+            previousScrollY = currentScrollY
+        }
+
+        window.addEventListener('scroll', handleScroll, { passive: true })
+        mobileViewport.addEventListener('change', handleScroll)
+        return () => {
+            window.removeEventListener('scroll', handleScroll)
+            mobileViewport.removeEventListener('change', handleScroll)
+        }
+    }, [])
+
+    const hideNavbar = navbarHidden && !mobileMenuOpen && !menuOpen && !searchSectionOpen
 
     const toggleMenu = () =>{
         setMenuOpen(!menuOpen)
@@ -42,7 +65,7 @@ export default function Navbar () {
 
     return (
 
-            <nav className="bg-white  px-0 md:px-40 w-full z-60 top-0 start-0 sticky border-b border-gray-200">
+            <nav className={`bg-white px-0 md:px-40 w-full z-60 start-0 sticky border-b border-gray-200 transition-[top] duration-200 motion-reduce:transition-none md:top-0 ${hideNavbar ? '-top-24 focus-within:top-0' : 'top-0'}`}>
 
                 {menuOpen && 
                     <PopUpLogin onClick={toggleMenu}></PopUpLogin>
