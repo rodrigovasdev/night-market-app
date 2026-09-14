@@ -4,6 +4,7 @@ import Button from "@/components/ui/Button"
 import SearchSection from "@/components/search/SearchSection";
 import OffCanva from "@/components/ui/OffCanva";
 import { Bars3Icon, HomeIcon, ShoppingBagIcon, ShoppingCartIcon, UserIcon } from "@heroicons/react/24/outline"
+import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useEffect, useState } from "react"
@@ -121,18 +122,24 @@ export default function Navbar () {
                     <SearchSection onClick={() => setSearchSectionOpen(false)} isOpen={searchSectionOpen}/>
                 }
 
-                <div className="flex justify-between px-4 md:px-0 py-4">
+                <div className="flex justify-between px-4 md:px-0">
 
-                    <div className="w-1/4 my-auto ">
+                    <div className="w-auto md:w-1/4 my-auto ">
                         <Link href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
-                            {/* <img src="https://flowbite.com/docs/images/logo.svg" className="h-8" alt="Flowbite Logo"/> */}
-                            <span className="self-center text-3xl font-semibold whitespace-nowrap">N-Market</span>
+                            <Image
+                                src="/assets/logo.png"
+                                alt="N-Market"
+                                width={2172}
+                                height={724}
+                                className="h-20 w-auto"
+                                priority
+                            />
                         </Link>
                     </div>
                     
-                    <div className="flex flex-row-reverse md:order-2 w-1/4 space-x-3 md:space-x-0 ">
+                    <div className="flex flex-row-reverse items-center md:order-2 w-1/4 space-x-3 md:space-x-0 ">
 
-                        <div className="hidden md:flex justify-around gap-3">
+                        <div className="hidden md:flex items-center justify-around gap-3">
                             {/* <Button type="icon" width="w-10" paddingX="px-2.5" onClick={() => setSearchSectionOpen(true)} border="border-none">
                                 <MagnifyingGlassIcon className={`w-6 h-6 text-neutral-950`} />
                             </Button> */}
@@ -174,7 +181,7 @@ export default function Navbar () {
                         
                     </div>
                     
-                    <div className="hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
+                    <div className="hidden w-full md:flex md:w-auto md:order-1 my-auto" id="navbar-sticky">
                         <ul className="flex flex-col gap-8 items-center p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white">
                             {navLinks.map((link) => (
                                 (() => {
