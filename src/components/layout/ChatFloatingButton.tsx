@@ -4,14 +4,18 @@ import { SparklesIcon, XMarkIcon, DocumentIcon } from "@heroicons/react/24/solid
 import ChatClient from "@/components/chat/ChatClient";
 import { useChatStore } from "@/store/chat.store";
 
+import useAnimatedPresence from "@/hooks/useAnimatedPresence";
+
 export default function ChatFloatingButton() {
   const { isOpen, isConnected, closeChat, toggleChat, messages, clearMessages } = useChatStore();
+
+  const { isMounted, isClosing } = useAnimatedPresence(isOpen);
 
   return (
     <>
       {/* Chat panel */}
-      {isOpen && (
-        <div className="fixed inset-x-0 top-0 z-100 flex h-dvh w-full flex-col border border-neutral-200 bg-neutral-50 shadow-2xl md:inset-x-auto md:top-auto md:bottom-24 md:right-4 md:h-auto md:w-[min(420px,calc(100vw-2rem))]">
+      {isMounted && (
+        <div inert={isClosing} className={`${isClosing ? "popup-panel-exit" : "popup-panel-enter"} origin-bottom-right fixed inset-x-0 top-0 z-100 flex h-dvh w-full flex-col border border-neutral-200 bg-neutral-50 shadow-2xl md:inset-x-auto md:top-auto md:bottom-24 md:right-4 md:h-auto md:w-[min(420px,calc(100vw-2rem))]`}>
           {/* Panel header */}
           <div className="flex shrink-0 items-center justify-between border-b border-neutral-200 bg-white px-5 py-4 pt-[max(1rem,env(safe-area-inset-top))] md:rounded-t-3xl md:pt-4">
             <div className="flex items-center gap-2">

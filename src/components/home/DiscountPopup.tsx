@@ -5,6 +5,8 @@ import NewsletterForm from "@/components/ui/NewsletterForm";
 import PopUpContainer from "@/components/ui/PopUpContainer";
 import { useUserStore } from "@/store/user.store";
 
+import useAnimatedPresence from "@/hooks/useAnimatedPresence";
+
 const POPUP_DELAY_MS = 10_000;
 
 export default function DiscountPopup() {
@@ -12,6 +14,10 @@ export default function DiscountPopup() {
     const discountSent = useUserStore((state) => state.discountSent);
     const discountPopupDismissed = useUserStore((state) => state.discountPopupDismissed);
     const dismissDiscountPopup = useUserStore((state) => state.dismissDiscountPopup);
+
+    const { isMounted, isClosing } = useAnimatedPresence(
+        isPopupOpen && !discountSent && !discountPopupDismissed
+    );
 
     useEffect(() => {
         if (discountSent || discountPopupDismissed) return;
@@ -26,10 +32,10 @@ export default function DiscountPopup() {
         return () => window.clearTimeout(timeout);
     }, [discountSent, discountPopupDismissed]);
 
-    if (!isPopupOpen || discountSent || discountPopupDismissed) return null;
+    if (!isMounted) return null;
 
     return (
-        <PopUpContainer onClose={dismissDiscountPopup}>
+        <PopUpContainer onClose={dismissDiscountPopup} isClosing={isClosing}>
             <div className="w-full md:w-[36rem]">
                 <h2 className="text-center text-2xl font-bold">Recibe tu descuento</h2>
                 <p className="text-center text-gray-600 pt-2">
