@@ -194,3 +194,18 @@ body {
     animation: none;
   }
 }
+
+.menu-sidebar-enter {
+  animation: cart-sidebar-slide 280ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.menu-sidebar-exit {
+  animation: cart-sidebar-slide 220ms ease-in reverse both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .menu-sidebar-enter,
+  .menu-sidebar-exit {
+    animation: none;
+  }
+}

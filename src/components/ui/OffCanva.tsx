@@ -1,5 +1,6 @@
+"use client";
 
-
+import useAnimatedPresence from "@/hooks/useAnimatedPresence";
 import Button from "./Button";
 import { XMarkIcon } from "@heroicons/react/24/solid";
 interface OffCanvaProps {
@@ -10,20 +11,21 @@ interface OffCanvaProps {
 }
 export default function OffCanva(props: OffCanvaProps) {
     const { onClick, isOpen, title, children} = props;
+    const { isMounted, isClosing } = useAnimatedPresence(isOpen);
+
+    if (!isMounted) return null;
 
     return (
         <>
             <div
-                className={`fixed inset-0 z-90 bg-black/50 transition-opacity duration-300 ${
-                    isOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
-                }`}
+                inert={isClosing}
+                className={`fixed inset-0 z-90 bg-black/50 ${isClosing ? "popup-backdrop-exit" : "popup-backdrop-enter"}`}
                 onClick={onClick}
             />
 
             <div
-                className={`fixed top-0 right-0 z-100 w-full md:w-1/4 h-screen bg-white transform transition-transform duration-500 ${
-                    isOpen ? 'translate-x-0' : 'translate-x-full'
-                }`}
+                inert={isClosing}
+                className={`fixed top-0 right-0 z-100 w-full md:w-1/4 h-dvh bg-white ${isClosing ? "menu-sidebar-exit" : "menu-sidebar-enter"}`}
             >
                 <div className="flex justify-between p-4 border-b border-gray-200">
                     <h1 className="font-bold text-lg my-auto">{title}</h1>

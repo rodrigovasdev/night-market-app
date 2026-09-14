@@ -75,7 +75,6 @@ export default function Navbar () {
                     <PopUpLogin onClick={toggleMenu}></PopUpLogin>
                 }
 
-                {mobileMenuOpen && (
                     <OffCanva onClick={() => setMobileMenuOpen(false)} isOpen={mobileMenuOpen} title="Navegación">
                         <ul className="flex flex-col gap-3 p-4 font-medium">
                             <li>
@@ -119,7 +118,6 @@ export default function Navbar () {
                             ))}
                         </ul>
                     </OffCanva>
-                )}
 
                 {
                     <SearchSection onClick={() => setSearchSectionOpen(false)} isOpen={searchSectionOpen}/>
