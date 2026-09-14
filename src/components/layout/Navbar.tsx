@@ -11,6 +11,8 @@ import { useEffect, useState } from "react"
 import PopUpLogin from "@/components/auth/PopUpLogin"
 import { useUserStore } from '@/store/user.store'
 import { useCartStore } from '@/store/cart.store'
+import { useCartPanelStore } from "@/store/cart-panel.store"
+
 export default function Navbar () {
 
     const [openMegaMenu, setOpenMegaMenu] = useState(false);
@@ -62,6 +64,7 @@ export default function Navbar () {
     ]
 
     const name = useUserStore((state) => state.name) || 'Invitado';
+    const openCart = useCartPanelStore((state) => state.openCart);
     const itemCount = useCartStore((state) => state.itemCount);
 
     return (
@@ -87,9 +90,9 @@ export default function Navbar () {
                             </li>
 
                             <li>
-                                <Link
-                                    href="/checkout"
-                                    onClick={closeMobileMenu}
+                                <button
+                                    type="button"
+                                    onClick={() => { closeMobileMenu(); openCart(); }}
                                     className="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-lg font-medium text-neutral-950 transition-colors hover:bg-neutral-100"
                                 >
                                     <ShoppingCartIcon className="h-5 w-5 text-neutral-950" />
@@ -99,7 +102,7 @@ export default function Navbar () {
                                             {itemCount}
                                         </span>
                                     </span>
-                                </Link>
+                                </button>
                             </li>
 
                             {navLinks.map((link) => (
@@ -143,7 +146,7 @@ export default function Navbar () {
                             {/* <Button type="icon" width="w-10" paddingX="px-2.5" onClick={() => setSearchSectionOpen(true)} border="border-none">
                                 <MagnifyingGlassIcon className={`w-6 h-6 text-neutral-950`} />
                             </Button> */}
-                                <Button href="/checkout" type="icon" width="w-10" paddingX="px-2.5" border="border-none">
+                                <Button onClick={openCart} type="icon" width="w-10" paddingX="px-2.5" border="border-none">
                                     <ShoppingCartIcon className={`w-6 h-6 text-neutral-950`} />
                                     <span className="absolute -top-1 -right-1 bg-neutral-950 text-white text-xs font-bold w-4 h-4 flex items-center justify-center rounded-full pointer-events-none">
                                         {itemCount}

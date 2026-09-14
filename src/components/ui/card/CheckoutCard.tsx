@@ -12,9 +12,10 @@ import { formatPriceCLP } from "@/utils/formatPrice";
 interface CheckoutCardProps {
     product: CartItem;
     subtotal?: number;
+    onNavigate?: () => void;
 }
 
-export default function CheckoutCard({ product, subtotal }: CheckoutCardProps) {
+export default function CheckoutCard({ product, subtotal, onNavigate }: CheckoutCardProps) {
     const mainImage = product.images.find((img) => img.isMain)?.url ?? product.images[0]?.url ?? '/assets/ecommerce.jpg';
     const removeItem = useCartStore((state) => state.removeItem);
     const updateQuantity = useCartStore((state) => state.updateQuantity);
@@ -37,25 +38,26 @@ export default function CheckoutCard({ product, subtotal }: CheckoutCardProps) {
         )}
         <CardContainer width="w-full" rounded="md:rounded-xl" padding="p-0" bgClass="hover:cursor-pointer hover:shadow-lg hover:border-1 hover:border-gray-900 transition duration-200 ease-in-out bg-white border-b-1 md:border-1 border-gray-300">
                     <div className="flex justify-between">
-                        <Link href={'/products/'+product.id} className="w-2/3 flex flex-col md:flex-row gap-3 p-2.5 cursor-pointer">
-                            <div className="relative w-24 h-24 md:w-28 md:h-28 shrink-0 overflow-hidden rounded-lg">
+                        <Link href={'/products/'+product.id} onClick={onNavigate} className="min-w-0 flex-1 flex flex-col sm:flex-row gap-3 p-2.5 cursor-pointer">
+                            <div className="relative w-20 h-20 shrink-0 overflow-hidden rounded-lg">
                                 <Image
                                     className="object-cover"
                                     src={mainImage}
                                     alt={product.name}
                                     fill
-                                    sizes="(min-width: 768px) 112px, 96px"
+                                    sizes="80px"
                                 />
                             </div>
-                            <div className="flex flex-col gap-3 my-auto "> 
-                                <h1 className="text-xl font-bold text-left">{product.name}</h1>
+                            <div className="flex min-w-0 flex-col gap-2 my-auto break-words">
+                                <h1 className="text-base font-bold text-left">{product.name}</h1>
                                 <span className="text-gray-500 text-sm">{product.shortDescription}</span>
                             </div>
                         </Link>
                        
-                        <div className="flex flex-col md:flex-row w-1/3 my-0 md:my-auto justify-between">
-                            <div className="order-2 md:order-1 my-auto mx-auto">
+                        <div className="flex w-28 shrink-0 flex-col justify-between py-2">
+                            <div className="order-2 my-auto mx-auto">
                                 <input
+                                    aria-label={`Cantidad de ${product.name}`}
                                     type="number"
                                     min={1}
                                     value={product.quantity}
@@ -64,11 +66,11 @@ export default function CheckoutCard({ product, subtotal }: CheckoutCardProps) {
                                 />
                             </div>
 
-                            <span className="order-3 md:order-2 font-semibold my-auto mx-auto">
-                                {formatPriceCLP(subtotal !== undefined ? subtotal : product.price)}
+                            <span className="order-3 font-semibold my-auto mx-auto">
+                                {formatPriceCLP(subtotal !== undefined ? subtotal : product.price * product.quantity)}
                             </span>
 
-                            <div className="order-1 md:order-3 my-auto flex justify-end">
+                            <div className="order-1 my-auto flex justify-end">
                                 <div className="flex flex-col gap-1 px-1">
                                     <Button type="icon" width="w-10" paddingX="px-2.5" border="border-none" onClick={() => setShowConfirm(true)}>
                                         <XMarkIcon className={`w-5 h-5 text-neutral-950`} />

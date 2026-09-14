@@ -162,3 +162,35 @@ body {
     animation: none;
   }
 }
+
+@keyframes cart-sidebar-slide {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+
+.cart-sidebar::backdrop {
+  background: rgb(0 0 0 / 50%);
+}
+
+.cart-sidebar-enter {
+  animation: cart-sidebar-slide 280ms ease-out;
+}
+
+.cart-sidebar-exit {
+  animation: cart-sidebar-slide 220ms ease-in reverse forwards;
+}
+
+.cart-sidebar-enter::backdrop {
+  animation: fade-in 280ms ease-out;
+}
+
+.cart-sidebar-exit::backdrop {
+  animation: fade-in 220ms ease-in reverse forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cart-sidebar,
+  .cart-sidebar::backdrop {
+    animation: none;
+  }
+}

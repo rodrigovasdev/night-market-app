@@ -3,6 +3,7 @@ import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import PromoStrip from "@/components/layout/PromoStrip";
 import Navbar from "@/components/layout/Navbar";
+import CartSidebar from "@/components/cart/CartSidebar";
 import Footer from "@/components/layout/Footer";
 import ChatFloatingButton from "@/components/layout/ChatFloatingButton";
 import { Toaster } from "sonner";
@@ -35,6 +36,7 @@ export default function RootLayout({
         </main>
         <Footer />
         <ChatFloatingButton />
+        <CartSidebar />
       </body>
     </html>
   );
